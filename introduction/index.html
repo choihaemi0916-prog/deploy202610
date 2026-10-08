@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>자기소개 프로필</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Dongle", sans-serif;
+            font-style: normal;            
+        }
+        html {
+            scroll-behavior: smooth;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        main {
+            width: 80%; 
+            padding-right: 20px;
+            text-align: center;
+        }
+        section {
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 10%;
+        }
+        
+        #home { 
+            background-color: #ffffff; 
+            text-align: center;
+        }
+        #home img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: block;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        #about { 
+            background-color: #f8f9fa; 
+        }
+        .aboutme { 
+            background-color: #ffffff; 
+            padding: 35px 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            max-width: 800px;
+            text-align: left;
+            word-break: keep-all;
+            line-height: 1.4;
+            font-size: 32px;
+            color: #495057;
+            border-left: 6px solid #212529;
+        }
+
+        #skill { 
+            background-color: #ffffff; 
+        }
+        .skill-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .skill-item {
+            margin-bottom: 20px;
+        }
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #333;
+        }
+        .skill-bar-bg {
+            width: 100%;
+            height: 14px;
+            background-color: #e0e0e0;
+            border-radius: 7px;
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            background-color: #212529;
+            border-radius: 7px;
+            transition: width 1s ease-in-out;
+        }
+
+        #education { 
+            background-color: #f8f9fa; 
+        }
+        .table-container {
+            width: 100%;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 28px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .styled-table th, 
+        .styled-table td {
+            padding: 12px 20px;
+            text-align: center;
+            border-bottom: 1px solid #eee; 
+        }
+        .styled-table th {
+            background-color: #212529;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .styled-table tr:nth-child(even) {
+            background-color: #f8f9fa; 
+        }
+
+        #career { 
+            background-color: #ffffff; 
+        }
+        .career-grid-container {
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        .career-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 20px; 
+        }
+        .career-card {
+            background-color: #212529; 
+            border: 1px solid #343a40;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .career-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: #6c757d;
+            transition: background-color 0.3s ease;
+        }
+        .career-card:hover {
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .career-card:hover::before {
+            background-color: #ffffff; 
+        }
+        .career-period {
+            font-size: 26px;
+            color: #adb5bd;
+            margin-bottom: 2px;
+            font-weight: bold;
+        }
+        .career-title {
+            font-size: 32px;
+            color: #ffffff;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+        .career-desc {
+            font-size: 24px;
+            color: #ced4da;
+            line-height: 1.2;
+        }
+
+        #contact { 
+            background-color: #212529; 
+            color: #ffffff;
+        }
+        #contact h2 {
+            color: #ffffff;
+        }
+        .contact-card {
+            background-color: #2c3035;
+            padding: 30px 50px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .contact-card a {
+            color: #f8f9fa;
+            text-decoration: none;
+            font-size: 36px;
+            transition: color 0.2s;
+        }
+        .contact-card a:hover {
+            color: #e9ecef;
+            text-decoration: underline;
+        }
+
+        h1, h2 {
+            font-size: 65px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        p {
+            font-size: 32px;
+            line-height: 1.4;
+        }
+
+        nav {
+            width: 20%; 
+            height: 100vh;
+            position: fixed;
+            right: 0;
+            top: 0;
+            background-color: #212529;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+        }
+        nav ul {
+            list-style: none;
+            text-align: right;
+            padding-right: 30px;
+            width: 100%;
+        }
+        nav ul li {
+            margin: 20px 0;
+        }
+        nav ul li a {
+            color: #adb5bd;
+            text-decoration: none;
+            font-size: 36px;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        nav ul li a:hover, 
+        nav ul li a.active {
+            color: #fff;
+            border-right: 4px solid #fff;
+            padding-right: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <main>
+            <section id="home">
+                <img src="https://choihyemee0916.dothome.co.kr/images/logo2.png" alt="프로필 이미지">
+                <h1><i class="fa-solid fa-hand"></i> 안녕하세요, 최혜미입니다.</h1>
+                <p>1993년 09월 16일에 태어났습니다.<br>
+                   취미는 독서, 웹툰, 영화감상이며 좋아하는 연예인은 왕이보입니다.<br>
+                   현재 더조은컴퓨터학원을 다니며 프론트엔드 개발자의 꿈을 키워가고 있습니다.</p>
+            </section>
+
+            <section id="about">
+                <h2><i class="fa-solid fa-user"></i> About Me</h2>
+                <div class="aboutme">
+                    법률사무소 사무보조, 전문학교 행정 및 상담, KT 전용 전산을 활용한 전화상담 및 승인업무 등 다양한 직장에서 실무 경험을 쌓았습니다.<br><br>
+                    문서 작성, 전산 입력, 서류 제출 및 관리, 고객 응대, 홈페이지 관리, 블로그 마케팅 등 전반적인 사무 업무를 차분하게 수행해왔으며, 포토샵·파워포인트·일러스트를 활용한 자료 제작 능력도 갖추고 있습니다.<br><br>
+                    세밀한 검토 능력과 강한 책임감을 바탕으로 프론트엔드 개발 업무에서도 신뢰성 높은 결과물을 만들어내겠습니다.
+                </div>
+            </section>
+
+            <section id="skill">
+                <h2><i class="fa-solid fa-code"></i> Skill</h2>
+                <div class="skill-container">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span><i class="fa-brands fa-java"></i> JAVA</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span><i class="fa-brands fa-html5"></i> HTML5</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span><i class="fa-brands fa-js"></i> JAVASCRIPT</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span><i class="fa-solid fa-database"></i> ORACLE</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="education">
+                <h2><i class="fa-solid fa-graduation-cap"></i> Education</h2>
+                <div class="table-container">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>기간</th>
+                                <th>기관/학교명</th>
+                                <th>전공/배운 내용</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2026.08~2027.03</td>
+                                <td>더조은컴퓨터아트학원</td>
+                                <td>풀스택 부트캠프</td>
+                            </tr>
+                            <tr>
+                                <td>2025.06~2026.08</td>
+                                <td>학점은행제</td>
+                                <td>컴퓨터공학과</td>
+                            </tr>
+                            <tr>
+                                <td>2017.08~2018.01</td>
+                                <td>더조은컴퓨터아트학원</td>
+                                <td>디지털앱&웹디자인콘텐츠제작</td>
+                            </tr>
+                            <tr>
+                                <td>2015.03~2017.02</td>
+                                <td>폴리텍대학</td>
+                                <td>컴퓨터정보과</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="career">
+                <h2><i class="fa-solid fa-briefcase"></i> Career</h2>
+                <div class="career-grid-container">
+                    <div class="career-grid">
+                        <div class="career-card">
+                            <div class="career-period">2년 5개월</div>
+                            <div class="career-title">통신사</div>
+                            <div class="career-desc">전산 서류 승인</div>
+                        </div>
+                        <div class="career-card">
+                            <div class="career-period">1년 5개월</div>
+                            <div class="career-title">전문학교</div>
+                            <div class="career-desc">행정 및 홈페이지관리</div>
+                        </div>
+                        <div class="career-card">
+                            <div class="career-period">6개월</div>
+                            <div class="career-title">법무사 사무실</div>
+                            <div class="career-desc">사무보조</div>
+                        </div>
+                        <div class="career-card">
+                            <div class="career-period">6개월</div>
+                            <div class="career-title">변호사 사무실</div>
+                            <div class="career-desc">사무보조</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact">
+                <h2><i class="fa-solid fa-envelope"></i> Contact</h2>
+                <div class="contact-card">
+                    <i class="fa-solid fa-paper-plane" style="font-size: 32px; color: #adb5bd;"></i>
+                    <a href="mailto:jun_hyuk2335@naver.com">jun_hyuk2335@naver.com</a>
+                </div>
+            </section>
+        </main>
+
+        <nav>
+            <ul>
+                <li><a href="#home" class="active">Home <i class="fa-solid fa-house"></i></a></li>
+                <li><a href="#about">About <i class="fa-solid fa-user"></i></a></li>
+                <li><a href="#skill">Skill <i class="fa-solid fa-code"></i></a></li>
+                <li><a href="#education">Education <i class="fa-solid fa-graduation-cap"></i></a></li>
+                <li><a href="#career">Career <i class="fa-solid fa-briefcase"></i></a></li>
+                <li><a href="#contact">Contact <i class="fa-solid fa-envelope"></i></a></li>
+            </ul>
+        </nav>    
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav ul li a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === `#${current}`) {
+                    a.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
