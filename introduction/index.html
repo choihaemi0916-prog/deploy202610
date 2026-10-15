@@ -27,7 +27,6 @@
             overflow-x: hidden;
         }
 
-        /* 최상단 헤더 (현재시간 & 로그인) */
         header {
             position: fixed;
             top: 0;
@@ -81,7 +80,6 @@
             transform: translateY(-2px);
         }
 
-        /* 전체 컨테이너 */
         .container {
             display: flex;
             flex-direction: column;
@@ -104,7 +102,6 @@
             padding: 60px 5%;
         }
 
-        /* 홈 섹션 */
         #home {
             background: linear-gradient(135deg, #fceade 0%, #f4eee2 100%);
             text-align: center;
@@ -121,7 +118,6 @@
             border: 5px solid #ffffff;
         }
 
-        /* 프로필 포인트 뱃지 (생년월일 및 MBTI 꾸미기) */
         .profile-badges {
             display: flex;
             justify-content: center;
@@ -153,7 +149,6 @@
             color: #e5989b;
         }
 
-        /* 어바웃 섹션 */
         #about {
             background-color: #f8f1f1;
         }
@@ -173,7 +168,6 @@
             border-left: 8px solid #b5838d;
         }
 
-        /* 취미 섹션 */
         #hobby {
             background-color: #fff8f6;
         }
@@ -237,7 +231,6 @@
             line-height: 1.2;
         }
 
-        /* 스킬 섹션 */
         #skill {
             background-color: #fffaf0;
         }
@@ -285,7 +278,6 @@
             transition: width 1s ease-in-out;
         }
 
-        /* 교육 섹션 */
         #education {
             background-color: #f7ede2;
         }
@@ -347,7 +339,6 @@
             transform: translateY(-2px);
         }
 
-        /* 경력 섹션 (3D Flip Card) */
         #career {
             background-color: #ffffff;
         }
@@ -493,12 +484,10 @@
             border-radius: 10px;
         }
 
-        /* 자격증 섹션 */
         #certification {
             background-color: #f8f1f1;
         }
 
-        /* 연락처 (Contact Input Form) 섹션 */
         #contact {
             background-color: #f4eee2;
             color: #4a4e69;
@@ -641,7 +630,6 @@
             word-break: keep-all;
         }
 
-        /* 하단 고정 내비게이션 바 */
         nav {
             width: 100%;
             height: 75px;
@@ -692,7 +680,6 @@
             transform: translateY(-2px);
         }
 
-        /* 맨 위로 이동 (TOP) 버튼 */
         .scroll-to-top {
             position: fixed;
             bottom: 90px;
@@ -726,7 +713,6 @@
             box-shadow: 0 10px 22px rgba(229, 152, 155, 0.5);
         }
 
-        /* 공통 모달창 오버레이 */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -789,7 +775,6 @@
             background-color: #e5989b;
         }
 
-        /* 로그인 / 회원가입 폼 스타일 */
         .auth-tab {
             display: flex;
             justify-content: center;
@@ -882,7 +867,6 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        /* 모바일 최적화 미디어쿼리 */
         @media (max-width: 768px) {
             header {
                 padding: 0 15px;
@@ -942,7 +926,6 @@
 </head>
 <body>
 
-    <!-- 최상단 헤더 -->
     <header>
         <div class="header-time" id="currentTime">
             <i class="fa-regular fa-clock"></i> <span>불러오는 중...</span>
@@ -954,12 +937,10 @@
 
     <div class="container">
         <main>
-            <!-- 홈 섹션 -->
             <section id="home">
                 <img src="https://choihyemee0916.dothome.co.kr/images/logo2.png" alt="프로필 이미지" onerror="this.src='https://placehold.co/300x300/ffb4a2/ffffff?text=HyeMee'">
                 <h1><i class="fa-solid fa-hand-holding-heart" style="color: #e5989b;"></i> 안녕하세요, 최혜미입니다.</h1>
                 
-                <!-- 생년월일과 MBTI를 예쁜 뱃지 스타일로 꾸민 부분 -->
                 <div class="profile-badges">
                     <div class="info-badge">
                         <i class="fa-solid fa-cake-candles"></i> 1993.09.16
@@ -972,7 +953,6 @@
                 <p>현재 더조은컴퓨터학원을 다니며 프론트엔드 개발자의 꿈을 키워가고 있습니다.</p>
             </section>
 
-            <!-- 자기소개 섹션 -->
             <section id="about">
                 <h2><i class="fa-solid fa-user-pen" style="color: #b5838d;"></i> About Me</h2>
                 <div class="aboutme">
@@ -982,7 +962,6 @@
                 </div>
             </section>
 
-            <!-- 취미 섹션 -->
             <section id="hobby">
                 <h2><i class="fa-solid fa-heart" style="color: #e5989b;"></i> Hobby</h2>
                 <div class="hobby-grid">
@@ -1009,7 +988,6 @@
                 </div>
             </section>
 
-            <!-- 기술 섹션 -->
             <section id="skill">
                 <h2><i class="fa-solid fa-laptop-code" style="color: #e5989b;"></i> Skill</h2>
                 <div class="skill-container">
@@ -1052,7 +1030,6 @@
                 </div>
             </section>
 
-            <!-- 학력/훈련기관 섹션 -->
             <section id="education">
                 <h2><i class="fa-solid fa-graduation-cap" style="color: #b5838d;"></i> Education</h2>
                 <div class="table-container">
@@ -1095,13 +1072,11 @@
                 </div>
             </section>
 
-            <!-- 경력 섹션 -->
             <section id="career">
                 <h2><i class="fa-solid fa-briefcase" style="color: #e5989b;"></i> Career</h2>
                 <div class="career-grid-container">
                     <div class="career-grid">
                         
-                        <!-- 통신사 -->
                         <div class="career-card-container">
                             <div class="career-card-inner">
                                 <div class="career-card-front">
@@ -1119,7 +1094,6 @@
                             </div>
                         </div>
 
-                        <!-- 전문학교 -->
                         <div class="career-card-container">
                             <div class="career-card-inner">
                                 <div class="career-card-front">
@@ -1137,7 +1111,6 @@
                             </div>
                         </div>
 
-                        <!-- 법무사 사무실 -->
                         <div class="career-card-container">
                             <div class="career-card-inner">
                                 <div class="career-card-front">
@@ -1155,7 +1128,6 @@
                             </div>
                         </div>
 
-                        <!-- 변호사 사무실 -->
                         <div class="career-card-container">
                             <div class="career-card-inner">
                                 <div class="career-card-front">
@@ -1177,7 +1149,6 @@
                 </div>
             </section>
 
-            <!-- 자격증 섹션 -->
             <section id="certification">
                 <h2><i class="fa-solid fa-award" style="color: #b5838d;"></i> Certification</h2>
                 <div class="table-container">
@@ -1210,38 +1181,31 @@
                 </div>
             </section>
 
-            <!-- 연락처 섹션 -->
             <section id="contact">
                 <h2><i class="fa-solid fa-envelope-open-text" style="color: #b5838d;"></i> Contact</h2>
                 <div class="contact-container">
                     
-                    <!-- 최상단 이메일 주소 -->
                     <div class="contact-email-badge">
                         <i class="fa-solid fa-paper-plane"></i>
                         <a href="mailto:jun_hyuk2335@naver.com">jun_hyuk2335@naver.com</a>
                     </div>
 
-                    <!-- 메일 작성 폼 -->
                     <form class="contact-form" onsubmit="handleContactSubmit(event)">
-                        <!-- 이름 입력 -->
                         <div class="contact-input-group">
                             <i class="fa-solid fa-user"></i>
                             <input type="text" class="contact-input" placeholder="성함 / 보낸이" required>
                         </div>
 
-                        <!-- 메일 제목 입력 -->
                         <div class="contact-input-group">
                             <i class="fa-solid fa-heading"></i>
                             <input type="text" class="contact-input" placeholder="메일 제목" required>
                         </div>
 
-                        <!-- 내용 입력 -->
                         <div class="contact-input-group textarea-group">
                             <i class="fa-solid fa-comment-dots"></i>
                             <textarea class="contact-textarea" placeholder="보내실 메시지 내용을 입력해주세요." required></textarea>
                         </div>
 
-                        <!-- 전송하기 버튼 -->
                         <button type="submit" class="send-btn">
                             <i class="fa-solid fa-paper-plane"></i> 전송하기
                         </button>
@@ -1251,7 +1215,6 @@
             </section>
         </main>
 
-        <!-- 하단 고정 내비게이션 바 -->
         <nav>
             <ul>
                 <li><a href="#home" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
@@ -1266,12 +1229,10 @@
         </nav>
     </div>
 
-    <!-- 맨 위로 가기 (TOP) 버튼 -->
     <button id="scrollTopBtn" class="scroll-to-top" onclick="scrollToTop()" title="맨 위로 가기">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
-    <!-- 증명서 전용 모달 팝업 -->
     <div id="certModal" class="modal-overlay" onclick="outsideClickCert(event)">
         <div class="modal-content">
             <h3 id="modalTitle">증명서 정보</h3>
@@ -1281,7 +1242,6 @@
         </div>
     </div>
 
-    <!-- 로그인 / 회원가입 모달 팝업 -->
     <div id="authModal" class="modal-overlay" onclick="outsideClickAuth(event)">
         <div class="modal-content">
             <div class="auth-tab">
@@ -1289,7 +1249,6 @@
                 <button id="signupTabBtn" class="auth-tab-btn" onclick="switchAuthTab('signup')">회원가입</button>
             </div>
 
-            <!-- 로그인 폼 -->
             <form id="loginForm" class="auth-form" onsubmit="handleAuthSubmit(event, 'login')">
                 <div class="input-group">
                     <i class="fa-solid fa-user"></i>
@@ -1302,7 +1261,6 @@
                 <button type="submit" class="submit-btn">로그인</button>
             </form>
 
-            <!-- 회원가입 폼 -->
             <form id="signupForm" class="auth-form" style="display: none;" onsubmit="handleAuthSubmit(event, 'signup')">
                 <div class="input-group">
                     <i class="fa-solid fa-user"></i>
@@ -1324,7 +1282,6 @@
     </div>
 
     <script>
-        // 실시간 시계 기능
         function updateClock() {
             const now = new Date();
             const year = now.getFullYear();
@@ -1344,7 +1301,6 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // 스크롤 관련 액션
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('nav ul li a');
         const scrollTopBtn = document.getElementById('scrollTopBtn');
@@ -1374,7 +1330,6 @@
             });
         });
 
-        // 맨 위로 이동
         function scrollToTop() {
             window.scrollTo({
                 top: 0,
@@ -1382,7 +1337,6 @@
             });
         }
 
-        // 증명서 모달 제어 함수
         function openCertModal(title, content) {
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalBody').innerHTML = content;
@@ -1400,7 +1354,6 @@
             }
         }
 
-        // 로그인 / 회원가입 모달 제어 함수
         function openAuthModal(mode) {
             switchAuthTab(mode);
             document.getElementById('authModal').style.display = 'flex';
@@ -1417,7 +1370,6 @@
             }
         }
 
-        // 로그인 / 회원가입 탭 전환
         function switchAuthTab(mode) {
             const loginBtn = document.getElementById('loginTabBtn');
             const signupBtn = document.getElementById('signupTabBtn');
@@ -1437,7 +1389,6 @@
             }
         }
 
-        // 폼 제출 이벤트 처리
         function handleAuthSubmit(event, mode) {
             event.preventDefault();
             if (mode === 'login') {
@@ -1448,7 +1399,6 @@
             closeAuthModal();
         }
 
-        // Contact 이메일 전송 이벤트 처리
         function handleContactSubmit(event) {
             event.preventDefault();
             alert('메시지가 성공적으로 발송되었습니다!');
