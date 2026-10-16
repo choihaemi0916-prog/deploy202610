@@ -922,6 +922,84 @@
                 font-size: 16px;
             }
         }
+
+            .qna-trigger-btn {
+                background-color: #ffb4a2;
+                color: black;
+                padding: 15px 40px;
+                font-size: 30px;
+                font-weight: bold;
+                border: none;
+                border-radius: 30px;
+                cursor: pointer;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                transition: all 0.3s ease;
+            }
+            .qna-trigger-btn:hover {
+                background-color: #ff9479;
+                transform: translateY(-2px);
+            }
+
+            .modal-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.6);
+                backdrop-filter: blur(5px);
+                z-index: 9999;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .modal-content2 {
+                position: relative;
+                background-color: #fff;
+                width: 90%;
+                max-width: 1000px;
+                height: 80vh;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                overflow: hidden;
+                animation: slideUp 0.3s ease-out;
+            }
+
+            .modal-content2 iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            .modal-close-btn {
+                position: absolute;
+                top: 15px;
+                right: 20px;
+                background: #f1f3f5;
+                border: none;
+                font-size: 30px;
+                font-weight: bold;
+                color: #495057;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                transition: background 0.2s;
+            }
+            .modal-close-btn:hover {
+                background: #e9ecef;
+                color: #000;
+            }
+
+            @keyframes slideUp {
+                from { transform: translateY(30px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }        
     </style>
 </head>
 <body>
@@ -1181,6 +1259,20 @@
                 </div>
             </section>
 
+                <section id="qna">
+                    <h2><i class="fa-solid fa-question" style="color: #b5838d;"></i> QnA</h2>
+                    <div style="text-align: center; padding: 50px 0;">
+                        <button id="open-qna-btn" class="qna-trigger-btn">💬 QnA 게시판 열기</button>
+                    </div>
+
+                    <div id="qna-modal" class="modal-overlay">
+                        <div class="modal-content2">
+                            <button id="close-qna-btn" class="modal-close-btn">&times;</button>
+                            <iframe src="https://hyemee0916.dothome.co.kr/bbs/board.php?bo_table=free" id="qna-frame" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                </section>
+
             <section id="contact">
                 <h2><i class="fa-solid fa-envelope-open-text" style="color: #b5838d;"></i> Contact</h2>
                 <div class="contact-container">
@@ -1213,6 +1305,7 @@
 
                 </div>
             </section>
+
         </main>
 
         <nav>
@@ -1224,6 +1317,7 @@
                 <li><a href="#education"><i class="fa-solid fa-graduation-cap"></i> Edu</a></li>
                 <li><a href="#career"><i class="fa-solid fa-briefcase"></i> Career</a></li>
                 <li><a href="#certification"><i class="fa-solid fa-award"></i> Certification</a></li>
+                <li><a href="#qna"><i class="fa-solid fa-question"></i> QnA</a></li>
                 <li><a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
             </ul>
         </nav>
@@ -1404,6 +1498,29 @@
             alert('메시지가 성공적으로 발송되었습니다!');
             event.target.reset();
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('qna-modal');
+        const openBtn = document.getElementById('open-qna-btn');
+        const closeBtn = document.getElementById('close-qna-btn');
+
+        openBtn.addEventListener('click', function() {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    });
     </script>
 </body>
 </html>
