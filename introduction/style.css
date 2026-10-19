@@ -121,6 +121,10 @@
 
         .aboutme {
             background-color: #ffffff;
+            background-image: url(aboutme.png);
+            background-position: right bottom;
+            background-size: 110px;
+            background-repeat: no-repeat;
             padding: 35px 40px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(230, 204, 178, 0.25);
