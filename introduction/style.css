@@ -1069,6 +1069,7 @@
             border: 10px dotted white;
             padding: 50px;
             margin-top: 300px;
+            border-radius: 100px;
         }
 
         .badge-box {
