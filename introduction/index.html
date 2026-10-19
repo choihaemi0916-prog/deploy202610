@@ -7,1017 +7,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>최혜미 - 자기소개 프로필</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Dongle", sans-serif;
-            font-style: normal;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            color: #4a4e69;
-        }
-
-        body {
-            background-color: #fcf6f5;
-            overflow-x: hidden;
-        }
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(8px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 30px;
-            box-shadow: 0 2px 15px rgba(220, 210, 200, 0.4);
-            z-index: 1000;
-        }
-
-        .header-time {
-            font-size: 24px;
-            color: #b5838d;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-        }
-
-        .header-time i {
-            color: #e5989b;
-        }
-
-        .login-btn {
-            background-color: #ffb4a2;
-            color: #ffffff;
-            border: none;
-            padding: 3px 16px;
-            font-size: 24px;
-            font-family: "Dongle", sans-serif;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 10px rgba(255, 180, 162, 0.4);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            text-decoration: none;
-            white-space: nowrap;
-        }
-
-        .login-btn:hover {
-            background-color: #e5989b;
-            transform: translateY(-2px);
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            padding-top: 60px;
-            padding-bottom: 90px;
-        }
-
-        main {
-            width: 100%;
-            text-align: center;
-        }
-
-        section {
-            min-height: calc(100vh - 60px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 60px 5%;
-        }
-
-        #home {
-            background: linear-gradient(135deg, #fceade 0%, #f4eee2 100%);
-            text-align: center;
-        }
-
-        #home img {
-            width: 240px;
-            height: 240px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: block;
-            box-shadow: 0 10px 25px rgba(224, 187, 228, 0.4);
-            border: 5px solid #ffffff;
-        }
-
-        .profile-badges {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 15px 0 20px 0;
-            flex-wrap: wrap;
-        }
-
-        .info-badge {
-            background-color: #ffffff;
-            border: 2px solid #ffb4a2;
-            padding: 4px 18px;
-            border-radius: 30px;
-            font-size: 26px;
-            color: #4a4e69;
-            box-shadow: 0 4px 12px rgba(255, 180, 162, 0.25);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: transform 0.2s ease;
-        }
-
-        .info-badge:hover {
-            transform: translateY(-3px);
-            background-color: #fff9f8;
-        }
-
-        .info-badge i {
-            color: #e5989b;
-        }
-
-        #about {
-            background-color: #f8f1f1;
-        }
-
-        .aboutme {
-            background-color: #ffffff;
-            padding: 35px 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(230, 204, 178, 0.25);
-            max-width: 800px;
-            width: 100%;
-            text-align: left;
-            word-break: keep-all;
-            line-height: 1.5;
-            font-size: 30px;
-            color: #6c757d;
-            border-left: 8px solid #b5838d;
-        }
-
-        #hobby {
-            background-color: #fff8f6;
-        }
-
-        .hobby-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            max-width: 800px;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .hobby-card {
-            background-color: #ffffff;
-            padding: 25px 20px;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(229, 152, 155, 0.15);
-            border: 2px solid #f4e8e1;
-            text-align: center;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .hobby-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(229, 152, 155, 0.3);
-            border-color: #ffb4a2;
-        }
-
-        .hobby-icon {
-            font-size: 45px;
-            color: #e5989b;
-            background-color: #fcf0ee;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .hobby-card:hover .hobby-icon {
-            background-color: #ffb4a2;
-            color: #ffffff;
-        }
-
-        .hobby-title {
-            font-size: 32px;
-            font-weight: bold;
-            color: #4a4e69;
-        }
-
-        .hobby-desc {
-            font-size: 24px;
-            color: #9a8c98;
-            line-height: 1.2;
-        }
-
-        #skill {
-            background-color: #fffaf0;
-        }
-
-        .skill-container {
-            width: 100%;
-            max-width: 650px;
-            margin: 0 auto;
-            text-align: left;
-            background: #ffffff;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(244, 211, 194, 0.3);
-        }
-
-        .skill-item {
-            margin-bottom: 22px;
-        }
-
-        .skill-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .skill-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
-            font-size: 28px;
-            font-weight: bold;
-            color: #4a4e69;
-        }
-
-        .skill-bar-bg {
-            width: 100%;
-            height: 16px;
-            background-color: #f0eef1;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .skill-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ffb4a2, #b5838d);
-            border-radius: 8px;
-            transition: width 1s ease-in-out;
-        }
-
-        #education {
-            background-color: #f7ede2;
-        }
-
-        .table-container {
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-            overflow-x: auto;
-        }
-
-        .styled-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 26px;
-            background-color: #ffffff;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(220, 210, 200, 0.3);
-            white-space: nowrap;
-        }
-
-        .styled-table th, 
-        .styled-table td {
-            padding: 14px 18px;
-            text-align: center;
-            border-bottom: 1px solid #f0e6df;
-        }
-
-        .styled-table th {
-            background-color: #b5838d;
-            color: #ffffff;
-            font-weight: bold;
-        }
-
-        .styled-table tr:nth-child(even) {
-            background-color: #fcf9f5;
-        }
-
-        .styled-table tr:hover {
-            background-color: #f7edeb;
-        }
-
-        .cert-btn {
-            background-color: #ffb4a2;
-            color: #ffffff;
-            border: none;
-            padding: 4px 14px;
-            font-size: 22px;
-            font-family: "Dongle", sans-serif;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 10px rgba(255, 180, 162, 0.4);
-        }
-
-        .cert-btn:hover {
-            background-color: #e5989b;
-            transform: translateY(-2px);
-        }
-
-        #career {
-            background-color: #ffffff;
-        }
-
-        .career-grid-container {
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .career-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 25px;
-        }
-
-        .career-card-container {
-            perspective: 1000px;
-            min-height: 220px;
-            width: 100%;
-        }
-
-        .career-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            min-height: 220px;
-            text-align: left;
-            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
-            transform-style: preserve-3d;
-            border-radius: 16px;
-            box-shadow: 0 6px 20px rgba(240, 230, 220, 0.4);
-        }
-
-        .career-card-container:hover .career-card-inner {
-            transform: rotateY(180deg);
-            box-shadow: 0 12px 25px rgba(220, 200, 190, 0.6);
-        }
-
-        .career-card-front, .career-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            min-height: 220px;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 16px;
-            padding: 22px;
-            overflow-y: auto;
-        }
-
-        .career-card-front {
-            background-color: #fffcf9;
-            border: 2px solid #f4e8e1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .career-card-front::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background-color: #ffb4a2;
-        }
-
-        .career-period {
-            font-size: 24px;
-            color: #d5bdaf;
-            margin-bottom: 2px;
-            font-weight: bold;
-        }
-
-        .career-title {
-            font-size: 32px;
-            color: #4a4e69;
-            margin-bottom: 4px;
-            font-weight: bold;
-        }
-
-        .career-desc {
-            font-size: 24px;
-            color: #9a8c98;
-            line-height: 1.2;
-        }
-
-        .hover-hint {
-            font-size: 20px;
-            color: #ffb4a2;
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: bold;
-        }
-
-        .career-card-back {
-            background-color: #f7ede2;
-            border: 2px solid #e5d8cc;
-            transform: rotateY(180deg);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
-
-        .career-card-back::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background-color: #b5838d;
-        }
-
-        .career-detail-title {
-            font-size: 26px;
-            color: #b5838d;
-            font-weight: bold;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 1px dashed #d5bdaf;
-            padding-bottom: 4px;
-        }
-
-        .career-detail-text {
-            font-size: 22px;
-            color: #6c757d;
-            line-height: 1.25;
-            word-break: keep-all;
-        }
-
-        .career-card-back::-webkit-scrollbar {
-            width: 4px;
-        }
-        .career-card-back::-webkit-scrollbar-thumb {
-            background-color: #ffb4a2;
-            border-radius: 10px;
-        }
-
-        #certification {
-            background-color: #f8f1f1;
-        }
-
-        #contact {
-            background-color: #f4eee2;
-            color: #4a4e69;
-        }
-
-        .contact-container {
-            width: 100%;
-            max-width: 650px;
-            background-color: #ffffff;
-            padding: 35px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(210, 200, 190, 0.35);
-            text-align: center;
-        }
-
-        .contact-email-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background-color: #fcf9f5;
-            border: 2px dashed #ffb4a2;
-            padding: 8px 20px;
-            border-radius: 30px;
-            margin-bottom: 20px;
-            max-width: 100%;
-            overflow: hidden;
-        }
-
-        .contact-email-badge i {
-            font-size: 24px;
-            color: #ffb4a2;
-            flex-shrink: 0;
-        }
-
-        .contact-email-badge a {
-            color: #b5838d;
-            font-size: 28px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: color 0.2s;
-            word-break: break-all;
-        }
-
-        .contact-email-badge a:hover {
-            color: #e5989b;
-            text-decoration: underline;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            text-align: left;
-        }
-
-        .contact-input-group {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .contact-input-group i {
-            position: absolute;
-            left: 16px;
-            color: #b5838d;
-            font-size: 20px;
-        }
-
-        .contact-input-group.textarea-group i {
-            top: 16px;
-        }
-
-        .contact-input, .contact-textarea {
-            width: 100%;
-            padding: 10px 16px 10px 46px;
-            font-size: 26px;
-            font-family: "Dongle", sans-serif;
-            border: 2px solid #f0e6df;
-            border-radius: 14px;
-            outline: none;
-            background-color: #fcf9f5;
-            color: #4a4e69;
-            transition: all 0.2s ease;
-        }
-
-        .contact-textarea {
-            height: 130px;
-            resize: none;
-            line-height: 1.2;
-        }
-
-        .contact-input:focus, .contact-textarea:focus {
-            border-color: #ffb4a2;
-            background-color: #ffffff;
-            box-shadow: 0 4px 12px rgba(255, 180, 162, 0.2);
-        }
-
-        .send-btn {
-            background-color: #ffb4a2;
-            color: #ffffff;
-            border: none;
-            padding: 6px 0;
-            font-size: 30px;
-            font-family: "Dongle", sans-serif;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 6px 15px rgba(255, 180, 162, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 8px;
-            width: 100%;
-        }
-
-        .send-btn:hover {
-            background-color: #e5989b;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(229, 152, 155, 0.5);
-        }
-
-        h1, h2 {
-            font-size: 58px;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            color: #4a4e69;
-            flex-wrap: wrap;
-            text-align: center;
-            word-break: keep-all;
-        }
-
-        p {
-            font-size: 30px;
-            line-height: 1.4;
-            color: #6c757d;
-            word-break: keep-all;
-        }
-
-        nav {
-            width: 100%;
-            height: 75px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 -4px 20px rgba(220, 210, 200, 0.4);
-            z-index: 1000;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            width: 100%;
-            padding: 0 10px;
-            overflow-x: auto;
-        }
-
-        nav ul li {
-            margin: 0;
-            flex-shrink: 0;
-        }
-
-        nav ul li a {
-            color: #9a8c98;
-            text-decoration: none;
-            font-size: 26px;
-            font-weight: bold;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            border-radius: 10px;
-        }
-
-        nav ul li a:hover, 
-        nav ul li a.active {
-            color: #ffffff;
-            background-color: #b5838d;
-            transform: translateY(-2px);
-        }
-
-        .scroll-to-top {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 45px;
-            height: 45px;
-            background-color: #b5838d;
-            color: #ffffff;
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 6px 18px rgba(181, 131, 141, 0.4);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 999;
-        }
-
-        .scroll-to-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .scroll-to-top:hover {
-            background-color: #e5989b;
-            transform: translateY(-4px);
-            box-shadow: 0 10px 22px rgba(229, 152, 155, 0.5);
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(74, 78, 105, 0.5);
-            backdrop-filter: blur(5px);
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            padding: 20px;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-content {
-            background-color: #ffffff;
-            padding: 30px 25px;
-            border-radius: 24px;
-            max-width: 420px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            position: relative;
-            animation: slideUp 0.3s ease;
-        }
-
-        .modal-content h3 {
-            font-size: 40px;
-            color: #4a4e69;
-            margin-bottom: 12px;
-        }
-
-        .modal-body {
-            font-size: 26px;
-            color: #6c757d;
-            margin-bottom: 20px;
-            line-height: 1.4;
-            background-color: #fcf9f5;
-            padding: 16px;
-            border-radius: 14px;
-            border: 2px dashed #f0e6df;
-            word-break: keep-all;
-        }
-
-        .close-btn {
-            background-color: #b5838d;
-            color: white;
-            border: none;
-            padding: 6px 24px;
-            font-size: 26px;
-            font-family: "Dongle", sans-serif;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .close-btn:hover {
-            background-color: #e5989b;
-        }
-
-        .auth-tab {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 16px;
-        }
-
-        .auth-tab-btn {
-            background: none;
-            border: none;
-            font-size: 28px;
-            font-family: "Dongle", sans-serif;
-            color: #9a8c98;
-            cursor: pointer;
-            padding: 2px 12px;
-            border-bottom: 3px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .auth-tab-btn.active {
-            color: #b5838d;
-            font-weight: bold;
-            border-bottom-color: #b5838d;
-        }
-
-        .auth-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .input-group {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .input-group i {
-            position: absolute;
-            left: 14px;
-            color: #b5838d;
-            font-size: 20px;
-        }
-
-        .auth-input {
-            width: 100%;
-            padding: 8px 12px 8px 42px;
-            font-size: 24px;
-            font-family: "Dongle", sans-serif;
-            border: 2px solid #f0e6df;
-            border-radius: 12px;
-            outline: none;
-            background-color: #fcf9f5;
-            color: #4a4e69;
-            transition: border-color 0.2s;
-        }
-
-        .auth-input:focus {
-            border-color: #ffb4a2;
-            background-color: #ffffff;
-        }
-
-        .submit-btn {
-            background-color: #ffb4a2;
-            color: #ffffff;
-            border: none;
-            padding: 6px 0;
-            font-size: 28px;
-            font-family: "Dongle", sans-serif;
-            border-radius: 14px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 10px rgba(255, 180, 162, 0.4);
-            margin-top: 6px;
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            background-color: #e5989b;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 0 15px;
-                height: 55px;
-            }
-            .header-time {
-                font-size: 18px;
-            }
-            .login-btn {
-                font-size: 20px;
-                padding: 2px 10px;
-            }
-            .container {
-                padding-top: 55px;
-                padding-bottom: 75px;
-            }
-            section {
-                min-height: calc(100vh - 55px);
-                padding: 40px 4%;
-            }
-            #home img {
-                width: 200px;
-                height: 200px;
-            }
-            h1, h2 {
-                font-size: 42px;
-                gap: 8px;
-            }
-            p, .aboutme, .skill-info {
-                font-size: 24px;
-            }
-            .aboutme {
-                padding: 25px 20px;
-            }
-            .hobby-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .career-grid {
-                grid-template-columns: 1fr;
-            }
-            nav {
-                height: 65px;
-            }
-            nav ul li a {
-                font-size: 22px;
-                padding: 4px 6px;
-            }
-            .scroll-to-top {
-                bottom: 75px;
-                right: 15px;
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-            }
-        }
-
-            .qna-trigger-btn {
-                background-color: #ffb4a2;
-                color: black;
-                padding: 15px 40px;
-                font-size: 30px;
-                font-weight: bold;
-                border: none;
-                border-radius: 30px;
-                cursor: pointer;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-                transition: all 0.3s ease;
-            }
-            .qna-trigger-btn:hover {
-                background-color: #ff9479;
-                transform: translateY(-2px);
-            }
-
-            .modal-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.6);
-                backdrop-filter: blur(5px);
-                z-index: 9999;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .modal-content2 {
-                position: relative;
-                background-color: #fff;
-                width: 90%;
-                max-width: 1000px;
-                height: 80vh;
-                border-radius: 12px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                overflow: hidden;
-                animation: slideUp 0.3s ease-out;
-            }
-
-            .modal-content2 iframe {
-                width: 100%;
-                height: 100%;
-                border: none;
-            }
-
-            .modal-close-btn {
-                position: absolute;
-                top: 15px;
-                right: 20px;
-                background: #f1f3f5;
-                border: none;
-                font-size: 30px;
-                font-weight: bold;
-                color: #495057;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                cursor: pointer;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 10000;
-                transition: background 0.2s;
-            }
-            .modal-close-btn:hover {
-                background: #e9ecef;
-                color: #000;
-            }
-
-            @keyframes slideUp {
-                from { transform: translateY(30px); opacity: 0; }
-                to { transform: translateY(0); opacity: 1; }
-            }        
-    </style>
 </head>
 <body>
-
     <header>
         <div class="header-time" id="currentTime">
             <i class="fa-regular fa-clock"></i> <span>불러오는 중...</span>
         </div>
-        <button class="login-btn" onclick="openAuthModal('login')">
-            <i class="fa-solid fa-right-to-bracket"></i> 로그인 / 회원가입
-        </button>
+        <div class="sns">
+            <a href="#"><img src="Instagram.png"></a>
+        </div>
     </header>
 
     <div class="container">
         <main>
             <section id="home">
-                <img src="https://choihyemee0916.dothome.co.kr/images/logo2.png" alt="프로필 이미지" onerror="this.src='https://placehold.co/300x300/ffb4a2/ffffff?text=HyeMee'">
-                <h1><i class="fa-solid fa-hand-holding-heart" style="color: #e5989b;"></i> 안녕하세요, 최혜미입니다.</h1>
+                <img src="logo2.png" alt="프로필 이미지">
+                <h1><i class="fa-solid fa-hand-holding-heart icon-hand-heart"></i> 안녕하세요, 최혜미입니다.</h1>
                 
                 <div class="profile-badges">
                     <div class="info-badge">
@@ -1026,13 +35,16 @@
                     <div class="info-badge">
                         <i class="fa-solid fa-face-smile-wink"></i> MBTI (INTP)
                     </div>
+                    <div class="info-badge">
+                        <i class="fa-sharp fa-solid fa-phone"></i> 010-7304-8514
+                    </div>
                 </div>
 
                 <p>현재 더조은컴퓨터학원을 다니며 프론트엔드 개발자의 꿈을 키워가고 있습니다.</p>
             </section>
 
             <section id="about">
-                <h2><i class="fa-solid fa-user-pen" style="color: #b5838d;"></i> About Me</h2>
+                <h2><i class="fa-solid fa-user-pen icon-user-pen"></i> About Me</h2>
                 <div class="aboutme">
                     법률사무소 사무보조, 전문학교 행정 및 상담, KT 전용 전산을 활용한 전화상담 및 승인업무 등 다양한 직장에서 실무 경험을 쌓았습니다.<br><br>
                     문서 작성, 전산 입력, 서류 제출 및 관리, 고객 응대, 홈페이지 관리, 블로그 마케팅 등 전반적인 사무 업무를 차분하게 수행해왔으며, 포토샵·파워포인트·일러스트를 활용한 자료 제작 능력도 갖추고 있습니다.<br><br>
@@ -1041,7 +53,7 @@
             </section>
 
             <section id="hobby">
-                <h2><i class="fa-solid fa-heart" style="color: #e5989b;"></i> Hobby</h2>
+                <h2><i class="fa-solid fa-heart icon-heart"></i> Hobby</h2>
                 <div class="hobby-grid">
                     <div class="hobby-card">
                         <div class="hobby-icon"><i class="fa-solid fa-book-open"></i></div>
@@ -1067,49 +79,49 @@
             </section>
 
             <section id="skill">
-                <h2><i class="fa-solid fa-laptop-code" style="color: #e5989b;"></i> Skill</h2>
+                <h2><i class="fa-solid fa-laptop-code icon-laptop-code"></i> Skill</h2>
                 <div class="skill-container">
                     <div class="skill-item">
                         <div class="skill-info">
-                            <span><i class="fa-brands fa-java" style="color: #b5838d;"></i> JAVA</span>
+                            <span><i class="fa-brands fa-java icon-java"></i> JAVA</span>
                             <span>75%</span>
                         </div>
                         <div class="skill-bar-bg">
-                            <div class="skill-bar-fill" style="width: 75%;"></div>
+                            <div class="skill-bar-fill bar-java"></div>
                         </div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-info">
-                            <span><i class="fa-brands fa-html5" style="color: #e5989b;"></i> HTML5</span>
+                            <span><i class="fa-brands fa-html5 icon-html5"></i> HTML5</span>
                             <span>90%</span>
                         </div>
                         <div class="skill-bar-bg">
-                            <div class="skill-bar-fill" style="width: 90%;"></div>
+                            <div class="skill-bar-fill bar-html5"></div>
                         </div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-info">
-                            <span><i class="fa-brands fa-js" style="color: #e5989b;"></i> JAVASCRIPT</span>
+                            <span><i class="fa-brands fa-js icon-js"></i> JAVASCRIPT</span>
                             <span>80%</span>
                         </div>
                         <div class="skill-bar-bg">
-                            <div class="skill-bar-fill" style="width: 80%;"></div>
+                            <div class="skill-bar-fill bar-js"></div>
                         </div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-info">
-                            <span><i class="fa-solid fa-database" style="color: #b5838d;"></i> ORACLE</span>
+                            <span><i class="fa-solid fa-database icon-oracle"></i> ORACLE</span>
                             <span>70%</span>
                         </div>
                         <div class="skill-bar-bg">
-                            <div class="skill-bar-fill" style="width: 70%;"></div>
+                            <div class="skill-bar-fill bar-oracle"></div>
                         </div>
                     </div>
                 </div>
             </section>
 
             <section id="education">
-                <h2><i class="fa-solid fa-graduation-cap" style="color: #b5838d;"></i> Education</h2>
+                <h2><i class="fa-solid fa-graduation-cap icon-graduation-cap"></i> Education</h2>
                 <div class="table-container">
                     <table class="styled-table">
                         <thead>
@@ -1151,7 +163,7 @@
             </section>
 
             <section id="career">
-                <h2><i class="fa-solid fa-briefcase" style="color: #e5989b;"></i> Career</h2>
+                <h2><i class="fa-solid fa-briefcase icon-briefcase"></i> Career</h2>
                 <div class="career-grid-container">
                     <div class="career-grid">
                         
@@ -1228,7 +240,7 @@
             </section>
 
             <section id="certification">
-                <h2><i class="fa-solid fa-award" style="color: #b5838d;"></i> Certification</h2>
+                <h2><i class="fa-solid fa-award icon-award"></i> Certification</h2>
                 <div class="table-container">
                     <table class="styled-table">
                         <thead>
@@ -1260,8 +272,8 @@
             </section>
 
                 <section id="qna">
-                    <h2><i class="fa-solid fa-question" style="color: #b5838d;"></i> QnA</h2>
-                    <div style="text-align: center; padding: 50px 0;">
+                    <h2><i class="fa-solid fa-question icon-question"></i> QnA</h2>
+                    <div class="qna-box">
                         <button id="open-qna-btn" class="qna-trigger-btn">💬 QnA 게시판 열기</button>
                     </div>
 
@@ -1274,7 +286,7 @@
                 </section>
 
             <section id="contact">
-                <h2><i class="fa-solid fa-envelope-open-text" style="color: #b5838d;"></i> Contact</h2>
+                <h2><i class="fa-solid fa-envelope-open-text icon-envelope-open"></i> Contact</h2>
                 <div class="contact-container">
                     
                     <div class="contact-email-badge">
@@ -1306,6 +318,27 @@
                 </div>
             </section>
 
+            <section id="login">
+                <h2><i class="fa-solid fa-right-to-bracket icon-envelope-open"></i> Login</h2>
+                <div id="app" class="login-container">
+                    <form class="login-form" @submit.prevent="fnJoin">
+                        <div class="login-input-group">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" class="login-input" v-model="userId" placeholder="아이디를 입력하세요">
+                        </div>
+
+                        <div class="login-input-group">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" class="login-input" v-model="pwd" placeholder="비밀번호를 입력하세요">
+                        </div>
+
+                        <button type="submit" class="login-btn">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i> 로그인
+                        </button>
+                    </form>
+                </div>                
+            </section>
+
         </main>
 
         <nav>
@@ -1319,6 +352,7 @@
                 <li><a href="#certification"><i class="fa-solid fa-award"></i> Certification</a></li>
                 <li><a href="#qna"><i class="fa-solid fa-question"></i> QnA</a></li>
                 <li><a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+                <li><a href="#login"><i class="fa-solid fa-right-to-bracket icon-envelope-open"></i> Login</a></li>
             </ul>
         </nav>
     </div>
@@ -1336,46 +370,11 @@
         </div>
     </div>
 
-    <div id="authModal" class="modal-overlay" onclick="outsideClickAuth(event)">
-        <div class="modal-content">
-            <div class="auth-tab">
-                <button id="loginTabBtn" class="auth-tab-btn active" onclick="switchAuthTab('login')">로그인</button>
-                <button id="signupTabBtn" class="auth-tab-btn" onclick="switchAuthTab('signup')">회원가입</button>
-            </div>
+</body>
 
-            <form id="loginForm" class="auth-form" onsubmit="handleAuthSubmit(event, 'login')">
-                <div class="input-group">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="text" class="auth-input" placeholder="아이디 (ID)" required>
-                </div>
-                <div class="input-group">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" class="auth-input" placeholder="비밀번호 (Password)" required>
-                </div>
-                <button type="submit" class="submit-btn">로그인</button>
-            </form>
+</html>
 
-            <form id="signupForm" class="auth-form" style="display: none;" onsubmit="handleAuthSubmit(event, 'signup')">
-                <div class="input-group">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="text" class="auth-input" placeholder="아이디 (ID)" required>
-                </div>
-                <div class="input-group">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" class="auth-input" placeholder="비밀번호 (Password)" required>
-                </div>
-                <div class="input-group">
-                    <i class="fa-solid fa-envelope"></i>
-                    <input type="email" class="auth-input" placeholder="이메일 (Email)" required>
-                </div>
-                <button type="submit" class="submit-btn">회원가입</button>
-            </form>
-
-            <button class="close-btn" onclick="closeAuthModal()">닫기</button>
-        </div>
-    </div>
-
-    <script>
+ <script>
         function updateClock() {
             const now = new Date();
             const year = now.getFullYear();
@@ -1448,51 +447,6 @@
             }
         }
 
-        function openAuthModal(mode) {
-            switchAuthTab(mode);
-            document.getElementById('authModal').style.display = 'flex';
-        }
-
-        function closeAuthModal() {
-            document.getElementById('authModal').style.display = 'none';
-        }
-
-        function outsideClickAuth(event) {
-            const modal = document.getElementById('authModal');
-            if (event.target === modal) {
-                closeAuthModal();
-            }
-        }
-
-        function switchAuthTab(mode) {
-            const loginBtn = document.getElementById('loginTabBtn');
-            const signupBtn = document.getElementById('signupTabBtn');
-            const loginForm = document.getElementById('loginForm');
-            const signupForm = document.getElementById('signupForm');
-
-            if (mode === 'login') {
-                loginBtn.classList.add('active');
-                signupBtn.classList.remove('active');
-                loginForm.style.display = 'flex';
-                signupForm.style.display = 'none';
-            } else {
-                signupBtn.classList.add('active');
-                loginBtn.classList.remove('active');
-                signupForm.style.display = 'flex';
-                loginForm.style.display = 'none';
-            }
-        }
-
-        function handleAuthSubmit(event, mode) {
-            event.preventDefault();
-            if (mode === 'login') {
-                alert('로그인 시도 중입니다!');
-            } else {
-                alert('회원가입이 완료되었습니다!');
-            }
-            closeAuthModal();
-        }
-
         function handleContactSubmit(event) {
             event.preventDefault();
             alert('메시지가 성공적으로 발송되었습니다!');
@@ -1521,6 +475,27 @@
             }
         });
     });
+
+    
+    const app = Vue.createApp({
+        data() {
+            return {
+                userId: "",
+                pwd: ""
+            };
+        },
+        methods: {
+            fnJoin: function () {
+                let self = this;
+                if(self.userId.trim() == '' || self.pwd.trim() == ''){
+                    alert("아이디와 비밀번호를 모두 입력해주세요.");
+                    return;
+                }
+                alert(`${self.userId}님, 환영합니다!`);
+            }
+        }
+    });
+
+    app.mount('#app');
+
     </script>
-</body>
-</html>
