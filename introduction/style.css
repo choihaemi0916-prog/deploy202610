@@ -917,6 +917,7 @@
             width: 100%;
         }
 
-        .sns img {
+        .sns i {
+            color: #e5989b;
             width: 25px;
         }
