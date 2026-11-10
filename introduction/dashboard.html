@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>예체능 취미 & 소모임 강사 대시보드 | Instructor Hub</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Inter & Noto Sans KR -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              bg: '#F8FAFC',
+              card: '#FFFFFF',
+              border: '#E2E8F0',
+              hover: '#F1F5F9',
+              green: '#10B981',
+              greenDark: '#059669',
+              greenHover: '#047857',
+              greenLight: '#ECFDF5',
+              accent: '#34D399',
+              muted: '#64748B',
+              subtle: '#475569',
+              dark: '#0F172A'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Subtle Light Grid Background Pattern */
+    body {
+      background-color: #F8FAFC;
+      background-image: radial-gradient(#CBD5E1 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: #0F172A;
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F8FAFC;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #10B981;
+    }
+
+    /* Green Glow utility */
+    .green-glow {
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+    }
+    .green-glow-hover:hover {
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+    }
+
+    /* Glassmorphism background for light mode */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col md:flex-row antialiased selection:bg-brand-green selection:text-white">
+
+  <!-- ================= SIDEBAR NAVIGATION ================= -->
+  <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-40 w-64 bg-white border-r border-brand-border transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col justify-between shadow-sm">
+    <div>
+      <!-- Brand Logo Header -->
+      <div class="h-20 flex items-center justify-between px-6 border-b border-brand-border">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-green to-emerald-400 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-brand-green/20">
+            <i class="fa-solid fa-palette"></i>
+          </div>
+          <div>
+            <h1 class="font-bold text-lg text-brand-dark leading-tight">ARTISAN</h1>
+            <p class="text-xs text-brand-muted">Studio & Community</p>
+          </div>
+        </div>
+        <button id="closeSidebarMobile" class="md:hidden text-brand-muted hover:text-brand-dark">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Instructor Info Badge -->
+      <div class="p-4 mx-3 my-4 bg-brand-greenLight rounded-xl border border-brand-green/20 flex items-center space-x-3">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="Instructor Profile" class="w-11 h-11 rounded-full object-cover border-2 border-brand-green" onerror="this.src='https://placehold.co/100x100/10B981/FFFFFF?text=PRO'">
+        <div class="overflow-hidden">
+          <h2 class="text-sm font-semibold text-brand-dark truncate">김유진 아티스트</h2>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full bg-brand-green text-white font-medium mt-0.5">서양화 & 유화 전문</span>
+        </div>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="px-3 space-y-1">
+        <a href="#dashboard" class="nav-link active flex items-center px-4 py-3 text-sm font-medium rounded-xl text-brand-greenDark bg-brand-greenLight border border-brand-green/30 transition-all shadow-sm">
+          <i class="fa-solid fa-chart-pie w-6 text-base text-brand-green"></i>
+          대시보드 홈
+        </a>
+        <a href="#classes" class="nav-link flex items-center px-4 py-3 text-sm font-medium rounded-xl text-brand-subtle hover:text-brand-dark hover:bg-brand-hover transition-all">
+          <i class="fa-solid fa-graduation-cap w-6 text-base text-brand-muted"></i>
+          클래스 관리 (원데이/정규)
+        </a>
+        <a href="#community" class="nav-link flex items-center px-4 py-3 text-sm font-medium rounded-xl text-brand-subtle hover:text-brand-dark hover:bg-brand-hover transition-all">
+          <i class="fa-solid fa-users w-6 text-base text-brand-muted"></i>
+          소모임 커뮤니티
+        </a>
+        <a href="#students" class="nav-link flex items-center px-4 py-3 text-sm font-medium rounded-xl text-brand-subtle hover:text-brand-dark hover:bg-brand-hover transition-all">
+          <i class="fa-solid fa-address-book w-6 text-base text-brand-muted"></i>
+          수강생 명단 관리
+        </a>
+        <a href="#earnings" class="nav-link flex items-center px-4 py-3 text-sm font-medium rounded-xl text-brand-subtle hover:text-brand-dark hover:bg-brand-hover transition-all">
+          <i class="fa-solid fa-wallet w-6 text-base text-brand-muted"></i>
+          정산 & 매출 내역
+        </a>
+        <a href="#reviews" class="nav-link flex items-center px-4 py-3 text-sm font-medium rounded-xl text-brand-subtle hover:text-brand-dark hover:bg-brand-hover transition-all">
+          <i class="fa-solid fa-star w-6 text-base text-brand-muted"></i>
+          후기 및 평점 관리
+        </a>
+      </nav>
+    </div>
+
+    <!-- Bottom Actions / Logout -->
+    <div class="p-4 border-t border-brand-border">
+      <button class="w-full flex items-center justify-center space-x-2 px-4 py-2.5 text-xs font-medium text-brand-muted hover:text-red-600 rounded-lg hover:bg-red-50 transition">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>로그아웃</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Backdrop overlay for mobile sidebar -->
+  <div id="sidebarBackdrop" class="fixed inset-0 bg-slate-900/40 z-30 hidden md:hidden backdrop-blur-sm"></div>
+
+  <!-- ================= MAIN CONTENT AREA ================= -->
+  <div class="flex-1 flex flex-col min-w-0 overflow-x-hidden">
+
+    <!-- Top Navigation Bar -->
+    <header class="h-20 border-b border-brand-border bg-white/90 backdrop-filter backdrop-blur-md sticky top-0 z-20 px-4 md:px-8 flex items-center justify-between gap-4 shadow-sm">
+      <!-- Left side: Mobile Toggle & Search Bar -->
+      <div class="flex items-center space-x-3 flex-1 max-w-md">
+        <button id="openSidebarMobile" class="md:hidden text-brand-subtle hover:text-brand-dark p-2">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+        <div class="relative w-full">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 transform -translate-y-1/2 text-brand-muted text-sm"></i>
+          <input type="text" placeholder="클래스, 소모임, 수강생 이름 검색..." class="w-full bg-slate-50 border border-brand-border rounded-xl pl-10 pr-4 py-2 text-sm text-brand-dark placeholder-brand-muted focus:outline-none focus:border-brand-green focus:bg-white transition">
+        </div>
+      </div>
+
+      <!-- Right side: Notifications & Quick Create Buttons -->
+      <div class="flex items-center space-x-3">
+        <!-- Notification Button -->
+        <div class="relative">
+          <button id="notifBtn" class="p-2.5 text-brand-subtle hover:text-brand-dark bg-slate-50 border border-brand-border rounded-xl hover:bg-brand-hover transition relative">
+            <i class="fa-regular fa-bell text-base"></i>
+            <span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-brand-green rounded-full ring-2 ring-white"></span>
+          </button>
+          
+          <!-- Dropdown Notification Box -->
+          <div id="notifDropdown" class="hidden absolute right-0 mt-3 w-80 glass-card border border-brand-border rounded-2xl shadow-xl p-4 z-50">
+            <div class="flex items-center justify-between pb-3 border-b border-brand-border">
+              <h3 class="font-semibold text-sm text-brand-dark">최신 알림</h3>
+              <span class="text-xs text-brand-green font-medium cursor-pointer hover:underline">모두 읽음</span>
+            </div>
+            <div class="divide-y divide-brand-border/60 text-xs py-1 max-h-64 overflow-y-auto">
+              <div class="py-2.5 hover:bg-brand-hover/80 rounded px-2">
+                <p class="text-brand-dark font-medium">[원데이클래스] 박지민님이 '유화 미니 페인팅' 신청 완료</p>
+                <span class="text-[10px] text-brand-muted">10분 전</span>
+              </div>
+              <div class="py-2.5 hover:bg-brand-hover/80 rounded px-2">
+                <p class="text-brand-dark font-medium">[소모임] '주말 드로잉 클럽' 새 게시글 작성됨</p>
+                <span class="text-[10px] text-brand-muted">1시간 전</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Action Buttons -->
+        <button id="openModalBtn" class="hidden sm:flex items-center space-x-2 bg-gradient-to-r from-brand-green to-emerald-600 text-white font-semibold text-xs md:text-sm px-4 py-2.5 rounded-xl green-glow green-glow-hover transition transform active:scale-95">
+          <i class="fa-solid fa-plus"></i>
+          <span>새 개설하기</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Dashboard Body -->
+    <main class="p-4 md:p-8 space-y-8 flex-1">
+
+      <!-- Welcome Banner -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between bg-gradient-to-r from-emerald-900 via-brand-dark to-slate-900 text-white rounded-2xl p-6 relative overflow-hidden shadow-lg">
+        <div class="relative z-10 space-y-1">
+          <span class="text-emerald-400 text-xs font-semibold tracking-wider uppercase">Instructor Portal</span>
+          <h2 class="text-xl md:text-2xl font-bold">안녕하세요, 김유진 강사님! 👋</h2>
+          <p class="text-slate-300 text-xs md:text-sm">오늘 진행 예정인 클래스는 <strong>2건</strong>이며, 신규 수강 신청 <strong>5건</strong>이 대기 중입니다.</p>
+        </div>
+        <div class="mt-4 md:mt-0 flex items-center space-x-2 relative z-10">
+          <button onclick="openModal('oneday')" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs px-3.5 py-2 rounded-lg backdrop-blur-sm transition">
+            + 원데이 클래스
+          </button>
+          <button onclick="openModal('group')" class="bg-brand-green hover:bg-brand-greenHover text-white text-xs px-3.5 py-2 rounded-lg transition font-medium shadow-md">
+            + 소모임 생성
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Overview Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Card 1: Revenue -->
+        <div class="bg-white border border-brand-border rounded-2xl p-5 hover:border-brand-green/60 hover:shadow-md transition">
+          <div class="flex items-center justify-between">
+            <span class="text-brand-muted text-xs font-medium">이번 달 정산 예정액</span>
+            <div class="w-9 h-9 rounded-xl bg-brand-greenLight text-brand-green flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-won-sign"></i>
+            </div>
+          </div>
+          <div class="mt-3">
+            <h3 class="text-2xl font-bold text-brand-dark">3,850,000 원</h3>
+            <div class="flex items-center space-x-1 mt-1 text-xs text-brand-greenDark font-medium">
+              <i class="fa-solid fa-arrow-trend-up"></i>
+              <span>전월 대비 +14.2%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Total Students -->
+        <div class="bg-white border border-brand-border rounded-2xl p-5 hover:border-brand-green/60 hover:shadow-md transition">
+          <div class="flex items-center justify-between">
+            <span class="text-brand-muted text-xs font-medium">누적 총 수강생 수</span>
+            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-user-group"></i>
+            </div>
+          </div>
+          <div class="mt-3">
+            <h3 class="text-2xl font-bold text-brand-dark">248 명</h3>
+            <div class="flex items-center space-x-1 mt-1 text-xs text-emerald-600 font-medium">
+              <i class="fa-solid fa-plus"></i>
+              <span>이번 주 신규 18명</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Active Classes -->
+        <div class="bg-white border border-brand-border rounded-2xl p-5 hover:border-brand-green/60 hover:shadow-md transition">
+          <div class="flex items-center justify-between">
+            <span class="text-brand-muted text-xs font-medium">진행 중인 클래스 / 모임</span>
+            <div class="w-9 h-9 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+          </div>
+          <div class="mt-3">
+            <h3 class="text-2xl font-bold text-brand-dark">8 개</h3>
+            <div class="flex items-center space-x-2 mt-1 text-xs text-brand-muted">
+              <span>원데이 5개</span> · <span>소모임 3개</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Average Rating -->
+        <div class="bg-white border border-brand-border rounded-2xl p-5 hover:border-brand-green/60 hover:shadow-md transition">
+          <div class="flex items-center justify-between">
+            <span class="text-brand-muted text-xs font-medium">평균 만족도 / 후기</span>
+            <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-500 flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <div class="mt-3">
+            <div class="flex items-baseline space-x-2">
+              <h3 class="text-2xl font-bold text-brand-dark">4.92</h3>
+              <span class="text-xs text-brand-muted">/ 5.0</span>
+            </div>
+            <p class="text-xs text-amber-600 mt-1 font-medium">총 124개 리뷰 작성됨</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Section (2 Columns) -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Revenue Chart (2 Columns Wide) -->
+        <div class="lg:col-span-2 bg-white border border-brand-border rounded-2xl p-6 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-base font-semibold text-brand-dark">월별 매출 및 수강생 현황</h3>
+              <p class="text-xs text-brand-muted">최근 6개월간 정산 수익 추이</p>
+            </div>
+            <select class="bg-slate-50 border border-brand-border text-xs text-brand-subtle rounded-lg px-3 py-1.5 focus:outline-none focus:border-brand-green">
+              <option>2026년 하반기</option>
+              <option>2026년 상반기</option>
+            </select>
+          </div>
+          <div class="h-64">
+            <canvas id="revenueChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Category Breakdown Chart (1 Column Wide) -->
+        <div class="bg-white border border-brand-border rounded-2xl p-6 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-base font-semibold text-brand-dark">강좌/모임 분야 비율</h3>
+              <p class="text-xs text-brand-muted">카테고리별 등록 수강생 분포</p>
+            </div>
+          </div>
+          <div class="h-64 flex items-center justify-center">
+            <canvas id="categoryChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Schedule & Class Management Table Section -->
+      <div class="bg-white border border-brand-border rounded-2xl p-6 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h3 class="text-base font-semibold text-brand-dark">내 클래스 및 소모임 현황</h3>
+            <p class="text-xs text-brand-muted">현재 모집 중이거나 진행 중인 일정을 관리하세요.</p>
+          </div>
+
+          <!-- Filter Tabs -->
+          <div class="flex items-center space-x-1 bg-slate-100 p-1 rounded-xl border border-brand-border text-xs">
+            <button onclick="filterClasses('all')" class="tab-btn active text-brand-greenDark bg-white shadow-sm px-3 py-1.5 rounded-lg font-medium transition">전체</button>
+            <button onclick="filterClasses('oneday')" class="tab-btn text-brand-muted hover:text-brand-dark px-3 py-1.5 rounded-lg transition">원데이 클래스</button>
+            <button onclick="filterClasses('regular')" class="tab-btn text-brand-muted hover:text-brand-dark px-3 py-1.5 rounded-lg transition">정규 수업</button>
+            <button onclick="filterClasses('group')" class="tab-btn text-brand-muted hover:text-brand-dark px-3 py-1.5 rounded-lg transition">소모임</button>
+          </div>
+        </div>
+
+        <!-- Class Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-brand-border text-xs text-brand-muted uppercase tracking-wider bg-slate-50">
+                <th class="py-3 px-4 rounded-l-lg">클래스/모임명</th>
+                <th class="py-3 px-4">구분</th>
+                <th class="py-3 px-4">일정 / 시간</th>
+                <th class="py-3 px-4">신청 인원</th>
+                <th class="py-3 px-4">수강료</th>
+                <th class="py-3 px-4">상태</th>
+                <th class="py-3 px-4 text-right rounded-r-lg">관리</th>
+              </tr>
+            </thead>
+            <tbody id="classListBody" class="divide-y divide-brand-border/60 text-sm">
+              <!-- Item 1 -->
+              <tr class="class-row hover:bg-slate-50/80 transition" data-type="oneday">
+                <td class="py-3.5 px-4">
+                  <div class="flex items-center space-x-3">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=100&auto=format&fit=crop&q=80" class="w-10 h-10 rounded-lg object-cover border border-brand-border" onerror="this.src='https://placehold.co/100x100/10B981/FFFFFF?text=Art'">
+                    <div>
+                      <p class="font-medium text-brand-dark truncate max-w-xs">나만의 감성 오일파스텔 풍경화 원데이</p>
+                      <span class="text-xs text-brand-muted">미술 · 유화/파스텔</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-4"><span class="px-2 py-0.5 text-xs rounded bg-emerald-100 text-emerald-800 font-medium">원데이</span></td>
+                <td class="py-3.5 px-4 text-xs text-brand-subtle">11월 14일(토) 14:00 - 16:30</td>
+                <td class="py-3.5 px-4">
+                  <div class="flex items-center space-x-2">
+                    <div class="w-24 bg-slate-100 rounded-full h-2 border border-brand-border overflow-hidden">
+                      <div class="bg-brand-green h-full rounded-full" style="width: 87.5%"></div>
+                    </div>
+                    <span class="text-xs text-brand-dark font-medium">7/8명</span>
+                  </div>
+                </td>
+                <td class="py-3.5 px-4 text-xs font-semibold text-brand-dark">55,000원</td>
+                <td class="py-3.5 px-4"><span class="px-2.5 py-1 text-[11px] font-semibold rounded-full bg-amber-100 text-amber-800">마감임박</span></td>
+                <td class="py-3.5 px-4 text-right">
+                  <button class="text-brand-muted hover:text-brand-dark p-1"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </td>
+              </tr>
+
+              <!-- Item 2 -->
+              <tr class="class-row hover:bg-slate-50/80 transition" data-type="group">
+                <td class="py-3.5 px-4">
+                  <div class="flex items-center space-x-3">
+                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=100&auto=format&fit=crop&q=80" class="w-10 h-10 rounded-lg object-cover border border-brand-border" onerror="this.src='https://placehold.co/100x100/10B981/FFFFFF?text=Group'">
+                    <div>
+                      <p class="font-medium text-brand-dark truncate max-w-xs">주말 아크릴화 크루 [주말 드로잉]</p>
+                      <span class="text-xs text-brand-muted">커뮤니티 · 소모임</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-4"><span class="px-2 py-0.5 text-xs rounded bg-teal-100 text-teal-800 font-medium">소모임</span></td>
+                <td class="py-3.5 px-4 text-xs text-brand-subtle">매주 격주 일요일 11:00</td>
+                <td class="py-3.5 px-4">
+                  <div class="flex items-center space-x-2">
+                    <div class="w-24 bg-slate-100 rounded-full h-2 border border-brand-border overflow-hidden">
+                      <div class="bg-teal-500 h-full rounded-full" style="width: 100%"></div>
+                    </div>
+                    <span class="text-xs text-brand-dark font-medium">12/12명</span>
+                  </div>
+                </td>
+                <td class="py-3.5 px-4 text-xs font-semibold text-brand-dark">월 30,000원</td>
+                <td class="py-3.5 px-4"><span class="px-2.5 py-1 text-[11px] font-semibold rounded-full bg-emerald-100 text-emerald-800">모집확정</span></td>
+                <td class="py-3.5 px-4 text-right">
+                  <button class="text-brand-muted hover:text-brand-dark p-1"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </td>
+              </tr>
+
+              <!-- Item 3 -->
+              <tr class="class-row hover:bg-slate-50/80 transition" data-type="regular">
+                <td class="py-3.5 px-4">
+                  <div class="flex items-center space-x-3">
+                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=100&auto=format&fit=crop&q=80" class="w-10 h-10 rounded-lg object-cover border border-brand-border" onerror="this.src='https://placehold.co/100x100/10B981/FFFFFF?text=Class'">
+                    <div>
+                      <p class="font-medium text-brand-dark truncate max-w-xs">입문자를 위한 유화 4주 정규 아카데미</p>
+                      <span class="text-xs text-brand-muted">정규 강좌 · 4주 코스</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-4"><span class="px-2 py-0.5 text-xs rounded bg-blue-100 text-blue-800 font-medium">정규수업</span></td>
+                <td class="py-3.5 px-4 text-xs text-brand-subtle">매주 화요일 19:00 - 21:00</td>
+                <td class="py-3.5 px-4">
+                  <div class="flex items-center space-x-2">
+                    <div class="w-24 bg-slate-100 rounded-full h-2 border border-brand-border overflow-hidden">
+                      <div class="bg-blue-500 h-full rounded-full" style="width: 50%"></div>
+                    </div>
+                    <span class="text-xs text-brand-dark font-medium">3/6명</span>
+                  </div>
+                </td>
+                <td class="py-3.5 px-4 text-xs font-semibold text-brand-dark">220,000원</td>
+                <td class="py-3.5 px-4"><span class="px-2.5 py-1 text-[11px] font-semibold rounded-full bg-blue-100 text-blue-800">모집중</span></td>
+                <td class="py-3.5 px-4 text-right">
+                  <button class="text-brand-muted hover:text-brand-dark p-1"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Bottom Split Grid: Activity Feed & Review Highlights -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Activity Feed (Registrations & Q&A) -->
+        <div class="bg-white border border-brand-border rounded-2xl p-6 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-base font-semibold text-brand-dark">실시간 수강 신청 및 커뮤니티 피드</h3>
+            <span class="text-xs text-brand-greenDark font-medium cursor-pointer hover:underline">전체보기</span>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Feed Item 1 -->
+            <div class="flex items-start space-x-3 p-3 rounded-xl bg-slate-50 border border-brand-border">
+              <div class="w-8 h-8 rounded-full bg-brand-greenLight text-brand-green flex items-center justify-center shrink-0 text-xs font-bold">
+                <i class="fa-solid fa-user-plus"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-xs text-brand-dark"><strong>이수현</strong> 님이 <span class="text-brand-greenDark font-medium">'오일파스텔 풍경화 원데이'</span>를 신청했습니다.</p>
+                <span class="text-[10px] text-brand-muted">15분 전 · 결제 완료 (55,000원)</span>
+              </div>
+            </div>
+
+            <!-- Feed Item 2 -->
+            <div class="flex items-start space-x-3 p-3 rounded-xl bg-slate-50 border border-brand-border">
+              <div class="w-8 h-8 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center shrink-0 text-xs font-bold">
+                <i class="fa-solid fa-comments"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-xs text-brand-dark"><strong>'주말 아크릴화 크루'</strong> 소모임에 신규 질문이 등록되었습니다.</p>
+                <p class="text-xs text-brand-subtle truncate mt-0.5">"이번 주 일요일 준비물에 캔버스 포함인가요?"</p>
+                <span class="text-[10px] text-brand-muted">1시간 전</span>
+              </div>
+            </div>
+
+            <!-- Feed Item 3 -->
+            <div class="flex items-start space-x-3 p-3 rounded-xl bg-slate-50 border border-brand-border">
+              <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 text-xs font-bold">
+                <i class="fa-solid fa-bell"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-xs text-brand-dark"><strong>최현우</strong> 님이 1:1 상담 문의를 남겼습니다.</p>
+                <span class="text-[10px] text-brand-muted">3시간 전</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Reviews & Ratings Highlight -->
+        <div class="bg-white border border-brand-border rounded-2xl p-6 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-base font-semibold text-brand-dark">최신 수강 후기</h3>
+            <span class="text-xs text-brand-greenDark font-medium cursor-pointer hover:underline">후기 답변하기</span>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Review 1 -->
+            <div class="p-4 rounded-xl bg-slate-50 border border-brand-border space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <span class="font-semibold text-xs text-brand-dark">강민지 수강생</span>
+                  <div class="flex text-amber-400 text-[10px]">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <span class="text-[10px] text-brand-muted">어제 작성</span>
+              </div>
+              <p class="text-xs text-brand-subtle leading-relaxed">
+                "그림을 처음 그려보는 초보자였는데 선생님께서 친절하게 색 조합부터 붓 터치까지 알려주셔서 감동이었어요! 작품도 너무 마음에 듭니다."
+              </p>
+              <span class="inline-block text-[10px] text-brand-greenDark bg-brand-greenLight border border-brand-green/20 px-2 py-0.5 rounded font-medium">오일파스텔 원데이 클래스</span>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="p-4 rounded-xl bg-slate-50 border border-brand-border space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <span class="font-semibold text-xs text-brand-dark">윤도현 수강생</span>
+                  <div class="flex text-amber-400 text-[10px]">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <span class="text-[10px] text-brand-muted">3일 전</span>
+              </div>
+              <p class="text-xs text-brand-subtle leading-relaxed">
+                "주말 소모임 활동 덕분에 바쁜 일상 속에서 힐링하고 있습니다. 좋은 사람들 만나서 작업할 수 있어 추천해요!"
+              </p>
+              <span class="inline-block text-[10px] text-teal-800 bg-teal-100 px-2 py-0.5 rounded font-medium">주말 아크릴화 크루</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ================= CREATION MODAL DIALOG ================= -->
+  <div id="createModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
+    <div class="glass-card border border-brand-border w-full max-w-lg rounded-2xl shadow-2xl p-6 relative">
+      
+      <!-- Close Button -->
+      <button id="closeModalBtn" class="absolute top-5 right-5 text-brand-muted hover:text-brand-dark">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="mb-5">
+        <h3 class="text-lg font-bold text-brand-dark">신규 개설하기</h3>
+        <p class="text-xs text-brand-muted">원데이 클래스, 정규 수업 또는 소모임 커뮤니티를 등록하세요.</p>
+      </div>
+
+      <!-- Form Inputs -->
+      <form id="createForm" class="space-y-4">
+        <div>
+          <label class="block text-xs font-medium text-brand-subtle mb-1">개설 유형</label>
+          <select id="modalTypeSelect" class="w-full bg-slate-50 border border-brand-border rounded-xl px-3.5 py-2 text-sm text-brand-dark focus:outline-none focus:border-brand-green focus:bg-white">
+            <option value="oneday">원데이 클래스</option>
+            <option value="regular">정규 강좌</option>
+            <option value="group">소모임 커뮤니티</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-brand-subtle mb-1">클래스/모임 제목</label>
+          <input type="text" placeholder="예: [초보환영] 나만의 감성 아크릴화 그리기" class="w-full bg-slate-50 border border-brand-border rounded-xl px-3.5 py-2 text-sm text-brand-dark placeholder-brand-muted focus:outline-none focus:border-brand-green focus:bg-white" required>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-brand-subtle mb-1">모집 정원 (명)</label>
+            <input type="number" placeholder="8" class="w-full bg-slate-50 border border-brand-border rounded-xl px-3.5 py-2 text-sm text-brand-dark placeholder-brand-muted focus:outline-none focus:border-brand-green focus:bg-white" required>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-brand-subtle mb-1">참가비 / 수강료 (원)</label>
+            <input type="text" placeholder="50,000" class="w-full bg-slate-50 border border-brand-border rounded-xl px-3.5 py-2 text-sm text-brand-dark placeholder-brand-muted focus:outline-none focus:border-brand-green focus:bg-white" required>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-brand-subtle mb-1">일정 및 시간</label>
+          <input type="text" placeholder="예: 2026-11-20 / 매주 토요일 14:00" class="w-full bg-slate-50 border border-brand-border rounded-xl px-3.5 py-2 text-sm text-brand-dark placeholder-brand-muted focus:outline-none focus:border-brand-green focus:bg-white" required>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-brand-subtle mb-1">상세 설명</label>
+          <textarea rows="3" placeholder="클래스 또는 소모임 소개글을 입력하세요..." class="w-full bg-slate-50 border border-brand-border rounded-xl px-3.5 py-2 text-sm text-brand-dark placeholder-brand-muted focus:outline-none focus:border-brand-green focus:bg-white resize-none"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-2 flex justify-end space-x-2">
+          <button type="button" id="cancelModalBtn" class="px-4 py-2 text-xs font-medium text-brand-subtle hover:text-brand-dark rounded-xl bg-slate-100 border border-brand-border transition">
+            취소
+          </button>
+          <button type="submit" class="px-5 py-2 text-xs font-semibold text-white bg-gradient-to-r from-brand-green to-emerald-600 rounded-xl green-glow transition">
+            개설 등록하기
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 hidden bg-white border border-brand-green text-brand-dark text-xs px-4 py-3 rounded-xl shadow-xl flex items-center space-x-2">
+    <i class="fa-solid fa-circle-check text-brand-green text-base"></i>
+    <span id="toastMsg">새로운 개설이 성공적으로 완료되었습니다!</span>
+  </div>
+
+  <!-- ================= INTERACTIVE JAVASCRIPT ================= -->
+  <script>
+    // --- Mobile Sidebar Toggle Logic ---
+    const sidebar = document.getElementById('sidebar');
+    const openSidebarMobile = document.getElementById('openSidebarMobile');
+    const closeSidebarMobile = document.getElementById('closeSidebarMobile');
+    const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
+    function toggleSidebar() {
+      sidebar.classList.toggle('-translate-x-full');
+      sidebarBackdrop.classList.toggle('hidden');
+    }
+
+    openSidebarMobile?.addEventListener('click', toggleSidebar);
+    closeSidebarMobile?.addEventListener('click', toggleSidebar);
+    sidebarBackdrop?.addEventListener('click', toggleSidebar);
+
+    // --- Notification Dropdown Toggle ---
+    const notifBtn = document.getElementById('notifBtn');
+    const notifDropdown = document.getElementById('notifDropdown');
+
+    notifBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      notifDropdown.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', () => {
+      if (!notifDropdown.classList.contains('hidden')) {
+        notifDropdown.classList.add('hidden');
+      }
+    });
+
+    // --- Modal Logic ---
+    const createModal = document.getElementById('createModal');
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const cancelModalBtn = document.getElementById('cancelModalBtn');
+    const createForm = document.getElementById('createForm');
+    const modalTypeSelect = document.getElementById('modalTypeSelect');
+
+    function openModal(defaultType = 'oneday') {
+      if (modalTypeSelect) modalTypeSelect.value = defaultType;
+      createModal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      createModal.classList.add('hidden');
+    }
+
+    openModalBtn?.addEventListener('click', () => openModal('oneday'));
+    closeModalBtn?.addEventListener('click', closeModal);
+    cancelModalBtn?.addEventListener('click', closeModal);
+
+    // Form Submit Event Handler
+    createForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      closeModal();
+      showToast("새 클래스/소모임이 성공적으로 개설되었습니다!");
+    });
+
+    // Toast Function
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3000);
+    }
+
+    // --- Filter Class Table Rows ---
+    function filterClasses(type) {
+      const rows = document.querySelectorAll('.class-row');
+      const tabs = document.querySelectorAll('.tab-btn');
+
+      // Update Tab Styles
+      tabs.forEach(tab => {
+        tab.classList.remove('text-brand-greenDark', 'bg-white', 'shadow-sm');
+        tab.classList.add('text-brand-muted');
+      });
+      event.target.classList.remove('text-brand-muted');
+      event.target.classList.add('text-brand-greenDark', 'bg-white', 'shadow-sm');
+
+      // Filter Rows
+      rows.forEach(row => {
+        if (type === 'all' || row.dataset.type === type) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    // --- Chart.js Integration ---
+    window.onload = function() {
+      // 1. Revenue Line Chart (Green Theme)
+      const ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+      new Chart(ctxRevenue, {
+        type: 'line',
+        data: {
+          labels: ['6월', '7월', '8월', '9월', '10월', '11월(예정)'],
+          datasets: [{
+            label: '수익 (만원)',
+            data: [210, 260, 310, 290, 340, 385],
+            borderColor: '#10B981',
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#10B981',
+            pointRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(226, 232, 240, 0.8)' },
+              ticks: { color: '#64748B', font: { size: 11 } }
+            },
+            y: {
+              grid: { color: 'rgba(226, 232, 240, 0.8)' },
+              ticks: { color: '#64748B', font: { size: 11 } }
+            }
+          }
+        }
+      });
+
+      // 2. Category Breakdown Doughnut Chart (Green Tone Palette)
+      const ctxCategory = document.getElementById('categoryChart').getContext('2d');
+      new Chart(ctxCategory, {
+        type: 'doughnut',
+        data: {
+          labels: ['원데이 클래스', '소모임 커뮤니티', '정규 강좌'],
+          datasets: [{
+            data: [55, 30, 15],
+            backgroundColor: ['#10B981', '#14B8A6', '#3B82F6'],
+            borderWidth: 0,
+            hoverOffset: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: '#475569',
+                font: { size: 11 },
+                padding: 15,
+                usePointStyle: true
+              }
+            }
+          },
+          cutout: '70%'
+        }
+      });
+    }
+  </script>
+</body>
+</html>
