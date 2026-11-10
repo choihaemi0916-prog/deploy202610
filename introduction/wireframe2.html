@@ -40,7 +40,8 @@
 
         button,
         input,
-        select {
+        select,
+        textarea {
             font: inherit
         }
 
@@ -99,18 +100,6 @@
 
         .logo img {
             width: 125px;
-        }
-
-        .logo-mark {
-            width: 37px;
-            height: 37px;
-            border-radius: 50% 50% 48% 48%;
-            background: var(--yellow);
-            display: grid;
-            place-items: center;
-            font-size: 22px;
-            transform: rotate(-12deg);
-            box-shadow: inset -5px -4px 0 #e9c52d
         }
 
         .search {
@@ -689,7 +678,6 @@
             font-weight: 700
         }
 
-        /* ----- 상단 타이틀 & 큰 별점 헤더 ----- */
         .review-header {
             text-align: center;
             margin-bottom: 35px;
@@ -706,12 +694,11 @@
 
         .review-header .big-stars {
             font-size: 46px;
-            color: #38a169; /* 초록색 사이트 크게 */
+            color: #38a169;
             letter-spacing: 4px;
             line-height: 1;
         }
 
-        /* ----- 순수 자동 슬라이더 스타일 (버튼/도트 제거) ----- */
         .slider-container {
             position: relative;
             overflow: hidden;
@@ -730,7 +717,6 @@
             box-sizing: border-box;
         }
 
-        /* 하얀 배경 사각형 카드 & 왼쪽 상단 동그란 프로필 구조 */
         .review {
             background: #ffffff;
             border: 1px solid var(--line);
@@ -1312,6 +1298,160 @@
 
         .toast.show { opacity: 1 }
 
+        /* ===== 동호회 개설 신청서 페이지 전용 CSS (width: 90%, 초록색 테마) ===== */
+        .club-form-container {
+            width: min(90%, 1000px);
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .club-form-container h2 {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--green);
+            margin: 0 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .club-form-container p.form-desc {
+            color: var(--muted);
+            font-size: 14px;
+            margin: 0 0 32px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--lime);
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        .form-group label.group-label {
+            display: block;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .form-group label.group-label .req {
+            color: var(--green);
+            margin-left: 2px;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            border: 1px solid #dfe4db;
+            border-radius: 10px;
+            padding: 13px 16px;
+            font-size: 14px;
+            background: #fbfcf9;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--green);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(40, 92, 59, 0.1);
+        }
+
+        /* Radio & Checkbox 그린 커스텀 */
+        .radio-grid, .check-grid {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .custom-option {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #444;
+            cursor: pointer;
+            background: #f4f7f2;
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            transition: 0.2s;
+        }
+
+        .custom-option:hover {
+            border-color: var(--green2);
+        }
+
+        .custom-option input {
+            accent-color: var(--green);
+            width: 16px;
+            height: 16px;
+        }
+
+        .file-upload-box {
+            border: 2px dashed #c2d4c0;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            background: #f9fbf8;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .file-upload-box:hover {
+            background: #edf4e9;
+            border-color: var(--green);
+        }
+
+        .file-upload-box input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-btn {
+            display: inline-block;
+            background: var(--green);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .submit-btn-wrap {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--line);
+        }
+
+        .submit-btn-wrap .btn-submit {
+            width: 100%;
+            max-width: 400px;
+            background: var(--green);
+            color: white;
+            font-size: 17px;
+            font-weight: 800;
+            padding: 16px;
+            border-radius: 12px;
+            transition: 0.2s;
+            box-shadow: 0 4px 14px rgba(40, 92, 59, 0.25);
+        }
+
+        .submit-btn-wrap .btn-submit:hover {
+            background: #1c422a;
+            transform: translateY(-2px);
+        }
+
         @media(max-width:900px) {
             .headrow { gap: 12px }
             .head-actions { gap: 8px }
@@ -1416,6 +1556,8 @@
             }
 
             .chat-float { bottom: 83px }
+            .club-form-container { width: 95%; padding: 20px; }
+            .radio-grid, .check-grid { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
@@ -1445,8 +1587,7 @@
                 </div>
                 <div class="navitem"><a class="navlink" href="#" data-page="clubs">소모임</a>
                     <div class="mega"><strong>CLUB · 함께하는 취미</strong><a data-page="clubs">소모임 둘러보기</a><a
-                            data-page="clubs">지역별 모임</a><a data-page="clubs">정기모임 캘린더</a><a data-page="clubs">모임
-                            만들기</a><a data-page="clubs">활동 갤러리</a></div>
+                            data-page="clubs">지역별 모임</a><a data-page="clubs">정기모임 캘린더</a><a data-page="createClub">모임 만들기</a><a data-page="clubs">활동 갤러리</a></div>
                 </div>
                 <div class="navitem"><a class="navlink" href="#" data-page="ai">AI 매니저</a>
                     <div class="mega"><strong>AI MANAGER · 취향을 읽다</strong><a data-page="ai">맞춤 클래스 추천</a><a
@@ -1487,10 +1628,12 @@
     </footer>
     <button class="chat-float" id="chatOpen" title="AI 매니저">✦</button><button class="plus-float" id="quickPlus"
         title="클래스·모임 등록">＋</button>
+    
     <div class="modal-back" id="modalBack">
         <div class="modal" id="modal"></div>
     </div>
     <div class="toast" id="toast"></div>
+
     <script>
         const pics = {
             pottery: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=700",
@@ -1519,7 +1662,6 @@
             { emoji: "🎨", name: "퇴근 후 드로잉 클럽", desc: "잘 그리지 않아도 괜찮은 그림 모임", people: "19명", area: "성수·건대" }
         ];
 
-        /* 이미지/이름/후기 구조 데이터 */
         const reviewsData = [
             { 
                 name: "한수련 님", 
@@ -1566,9 +1708,8 @@
 <section class="section"><div class="wrap">${sectionTitle("FIND YOUR CATEGORY", "어떤 취미에 관심이 있나요?", "관심 있는 분야를 선택하면 다양한 클래스와 아카데미를 찾아드려요.")}<div class="categories">${[["🎨", "미술·공예"], ["🍳", "요리·베이킹"], ["🧘", "운동·건강"], ["🎵", "음악·댄스"], ["📷", "사진·영상"], ["💄", "뷰티·패션"], ["💻", "IT·디지털"], ["📚", "어학·교양"]].map(c => `<a href="#" class="cat" data-page="classes"><div class="ico">${c[0]}</div><b>${c[1]}</b></a>`).join("")}</div></div></section>
 <section class="section soft"><div class="wrap">${sectionTitle("DADA PICK", "지금 가장 인기 있는 클래스", "많은 사람들이 선택한 인기 클래스와 새로운 경험을 만나보세요.")}<div class="cards">${items.slice(0, 4).map(card).join("")}</div></div></section>
 <section class="section"><div class="wrap">${sectionTitle("SMART PRICE", "가격 공개 아카데미 TOP 3", "회당 단가와 수업 조건을 공개한 가성비 좋은 아카데미.", "가격 비교하기 →", "compare")}<div class="rank-grid"><div class="rank"><div class="rank-num">01</div><div><h3>밸런스 요가 스튜디오</h3><p>주 2회 · 8회권 · 60분</p></div><strong>15,000원/회</strong></div><div class="rank"><div class="rank-num">02</div><div><h3>홍대 댄스플로어</h3><p>주 2회 · 8회권 · 50분</p></div><strong>11,250원/회</strong></div><div class="rank"><div class="rank-num">03</div><div><h3>서촌 플라워룸</h3><p>주 1회 · 8회권 · 90분</p></div><strong>20,000원/회</strong></div></div></div></section>
-<section class="section soft"><div class="wrap">${sectionTitle("MEET YOUR PEOPLE", "취향이 통하는 사람들과 함께", "가볍게 시작하는 무료 소모임부터 정기적인 취미 모임까지.", "모임 둘러보기 →", "clubs")}<div class="club-grid"><div class="club-feature"><span class="tag" style="position:static;width:max-content">DADA COMMUNITY</span><h3>혼자라서 망설였던 취미,<br>함께라면 즐거워요.</h3><p>관심사가 같은 사람들과 연결되는 새로운 방법</p><div><button class="btn light" data-page="clubs">소모임 찾기 →</button></div></div><div class="club-list">${clubs.slice(0, 3).map(c => `<div class="club-row"><div class="club-icon">${c.emoji}</div><div><h4>${c.name}</h4><p>${c.area} · ${c.people}</p></div><span>모집중</span></div>`).join("")}</div></div></div></section>
+<section class="section soft"><div class="wrap">${sectionTitle("MEET YOUR PEOPLE", "취향이 통하는 사람들과 함께", "가볍게 시작하는 무료 소모임부터 정기적인 취미 모임까지.", "모임 둘러보기 →", "clubs")}<div class="club-grid"><div class="club-feature"><span class="tag" style="position:static;width:max-content">DADA COMMUNITY</span><h3>혼자라서 망설였던 취미,<br>함께라면 즐거워요.</h3><p>관심사가 같은 사람들과 연결되는 새로운 방법</p><div><button class="btn light" data-page="createClub">소모임 만들기 →</button></div></div><div class="club-list">${clubs.slice(0, 3).map(c => `<div class="club-row"><div class="club-icon">${c.emoji}</div><div><h4>${c.name}</h4><p>${c.area} · ${c.people}</p></div><span>모집중</span></div>`).join("")}</div></div></div></section>
 
-<!-- 후기 섹션: 양쪽 버튼/하단 도트 제거, 중앙 정렬 헤더 및 별점, 하얀 배경 사각형 카드 구성 -->
 <section class="section">
     <div class="wrap">
         <div class="review-header">
@@ -1597,7 +1738,119 @@
 <section class="section"><div class="wrap"><div class="cta"><div><h2>나의 새로운 취미, DADA에서 시작해요.</h2><p>관심사와 예산에 맞는 클래스를 지금 찾아보세요.</p></div><button class="btn light" data-page="signup">나에게 맞는 취미 찾기 →</button></div></div></section>`}
         
         function listing(type) { let data = type === "classes" ? items.filter(x => x.kind === "원데이 클래스") : items.filter(x => x.kind === "아카데미"); return `<div class="page-hero"><div class="wrap"><div class="crumb">홈 / ${type === "classes" ? "클래스" : "아카데미"}</div><h1>${type === "classes" ? "하루의 새로운 경험, 원데이 클래스" : "꾸준히 성장하는 배움, 아카데미"}</h1><p>${type === "classes" ? "하루 동안 새로운 취미를 경험하고 나만의 작품을 만들어보세요." : "내 주변 학원과 센터의 수강료·시설·수업 조건을 비교해 보세요."}</p></div></div><div class="content"><div class="wrap"><div class="toolbar"><div class="filters"><button class="selected">전체</button><button>공예</button><button>요리</button><button>미술</button><button>운동</button><button>음악</button><button>사진</button></div><select id="sort"><option>인기순</option><option>가격 낮은순</option><option>평점 높은순</option><option>최신순</option></select></div><div class="listing-layout"><aside class="filter-panel"><h3>상세 필터</h3><div class="filter-group"><b>분야</b>${["미술·공예", "요리·베이킹", "운동·건강", "음악·댄스", "사진·영상"].map(v => `<label><input type="checkbox">${v}</label>`).join("")}</div><div class="filter-group"><b>가격대</b><label><input type="checkbox">3만원 이하</label><label><input type="checkbox">3~5만원</label><label><input type="checkbox">5~10만원</label></div><div class="filter-group"><b>수업 조건</b><label><input type="checkbox">가격 공개</label><label><input type="checkbox">주차 가능</label><label><input type="checkbox">1:1 수업</label></div><button class="btn" style="width:100%" onclick="toast('필터가 적용되었습니다.')">필터 적용</button></aside><div class="listing"><div class="section-head"><div><b>${data.length}개의 프로그램</b><p>원하는 조건으로 취향에 맞는 배움을 찾아보세요.</p></div><a class="more" href="#" data-page="map">지도로 보기 →</a></div><div class="cards" id="listingCards">${data.map(card).join("")}</div></div></div></div></div>` }
-        function clubsPage() { return `<div class="page-hero"><div class="wrap"><div class="crumb">홈 / 소모임</div><h1>취향이 통하는 사람들과 함께</h1><p>관심사가 같은 사람들과 새로운 취미를 만들고 일상을 나눠보세요.</p></div></div><div class="content"><div class="wrap"><div class="toolbar"><div class="filters"><button class="selected">전체 모임</button><button>운동</button><button>문화·예술</button><button>맛집·카페</button><button>사진</button><button>독서</button></div><button class="btn" onclick="toast('로그인 후 모임을 개설할 수 있어요.')">＋ 모임 만들기</button></div><div class="club-grid"><div class="club-feature"><span class="tag" style="position:static;width:max-content">이번 주 추천</span><h3>주말의 작은 모험을<br>함께 시작해요.</h3><p>가까운 동네에서 만나는 취미 친구</p></div><div class="club-list">${clubs.map(c => `<div class="club-row"><div class="club-icon">${c.emoji}</div><div><h4>${c.name}</h4><p>${c.desc}</p><p style="margin-top:6px">${c.area} · ${c.people}</p></div><span>참여하기</span></div>`).join("")}</div></div><div class="panel" style="margin-top:25px"><h3>이번 달 정기모임 일정</h3><p>11.08 (일) 서울 산책단 한강 걷기  11.14 (토) 드로잉 클럽 정기 모임 11.21 (토) 셔터 누르는 사람들 출사</p></div></div></div>` }
+        
+        /* 소모임 둘러보기 페이지 (모임 만들기 클릭 시 새 페이지 이동) */
+        function clubsPage() { return `<div class="page-hero"><div class="wrap"><div class="crumb">홈 / 소모임</div><h1>취향이 통하는 사람들과 함께</h1><p>관심사가 같은 사람들과 새로운 취미를 만들고 일상을 나눠보세요.</p></div></div><div class="content"><div class="wrap"><div class="toolbar"><div class="filters"><button class="selected">전체 모임</button><button>운동</button><button>문화·예술</button><button>독서</button><button>사진</button></div><button class="btn" data-page="createClub">＋ 모임 만들기</button></div><div class="club-grid"><div class="club-feature"><span class="tag" style="position:static;width:max-content">이번 주 추천</span><h3>주말의 작은 모험을<br>함께 시작해요.</h3><p>가까운 동네에서 만나는 취미 친구</p><div><button class="btn light" data-page="createClub">소모임 개설하기 →</button></div></div><div class="club-list">${clubs.map(c => `<div class="club-row"><div class="club-icon">${c.emoji}</div><div><h4>${c.name}</h4><p>${c.desc}</p><p style="margin-top:6px">${c.area} · ${c.people}</p></div><span>참여하기</span></div>`).join("")}</div></div><div class="panel" style="margin-top:25px"><h3>이번 달 정기모임 일정</h3><p>11.08 (일) 서울 산책단 한강 걷기  11.14 (토) 드로잉 클럽 정기 모임 11.21 (토) 셔터 누르는 사람들 출사</p></div></div></div>` }
+        
+        /* ===== 📝 동호회 개설 신청서 전용 새 페이지 (독립 페이지 UI) ===== */
+        function createClubPage() {
+            return `
+            <div class="page-hero">
+                <div class="wrap">
+                    <div class="crumb">홈 / 소모임 / 동호회 개설</div>
+                    <h1>나만의 동호회 개설하기</h1>
+                    <p>취향이 맞는 멤버들과 함께할 새로운 모임을 만들어 보세요.</p>
+                </div>
+            </div>
+            <div class="content" style="background:#f8faf6;">
+                <div class="club-form-container">
+                    <h2>📝 동호회 개설 신청서</h2>
+                    <p class="form-desc">아래 작성 항목을 정확히 입력해주시면 검토 후 소모임이 등록됩니다.</p>
+
+                    <form id="clubCreateForm" onsubmit="event.preventDefault(); toast('동호회 개설 신청이 완료되었습니다!'); render('clubs');">
+                        <!-- 동호회 이름 -->
+                        <div class="form-group">
+                            <label class="group-label">동호회 이름 <span class="req">*</span></label>
+                            <input type="text" placeholder="예: [서울] 야간 러닝 크루 '달밤'" required>
+                        </div>
+
+                        <!-- 동호회 카테고리 (택일) -->
+                        <div class="form-group">
+                            <label class="group-label">동호회 카테고리 (택일) <span class="req">*</span></label>
+                            <div class="radio-grid">
+                                <label class="custom-option"><input type="radio" name="category" value="운동/스포츠" checked> 운동/스포츠</label>
+                                <label class="custom-option"><input type="radio" name="category" value="문화/예술/공연"> 문화/예술/공연</label>
+                                <label class="custom-option"><input type="radio" name="category" value="독서/스터디/어학"> 독서/스터디/어학</label>
+                                <label class="custom-option"><input type="radio" name="category" value="요리/맛집/카페"> 요리/맛집/카페</label>
+                                <label class="custom-option"><input type="radio" name="category" value="아웃도어/캠핑/여행"> 아웃도어/캠핑/여행</label>
+                            </div>
+                            <div style="margin-top:10px; display:flex; align-items:center; gap:8px;">
+                                <label class="custom-option"><input type="radio" name="category" value="기타"> 기타 (직접 입력)</label>
+                                <input type="text" placeholder="카테고리 직접 입력" style="flex:1; max-width:300px;">
+                            </div>
+                        </div>
+
+                        <!-- 활동 지역 -->
+                        <div class="form-group">
+                            <label class="group-label">활동 지역 <span class="req">*</span></label>
+                            <input type="text" placeholder="예: 서울시 마포구 일대 또는 온/오프라인 병행" required>
+                        </div>
+
+                        <!-- 동호회 소개 한 줄 -->
+                        <div class="form-group">
+                            <label class="group-label">동호회 소개 한 줄 <span class="req">*</span></label>
+                            <input type="text" placeholder="예: 퇴근 후 함께 가볍게 달리며 스트레스를 풀 분들을 모집합니다!" required>
+                        </div>
+
+                        <!-- 상세 소개 및 개설 목적 -->
+                        <div class="form-group">
+                            <label class="group-label">상세 소개 및 개설 목적 <span class="req">*</span></label>
+                            <textarea rows="5" placeholder="활동 내용, 정기 모임 주기(예: 매주 목요일 저녁 8시), 가입 조건 등을 자유롭게 적어주세요." required></textarea>
+                        </div>
+
+                        <!-- 가입 조건 -->
+                        <div class="form-group">
+                            <label class="group-label">가입 조건</label>
+                            
+                            <!-- 연령대 -->
+                            <div style="margin-bottom:12px;">
+                                <span style="font-size:13px; font-weight:700; color:#555; display:block; margin-bottom:6px;">· 연령대</span>
+                                <div class="check-grid">
+                                    <label class="custom-option"><input type="checkbox" checked> 제한 없음</label>
+                                    <label class="custom-option"><input type="checkbox"> 2030대</label>
+                                    <label class="custom-option"><input type="checkbox"> 4050대</label>
+                                    <label class="custom-option"><input type="checkbox"> 기타</label>
+                                </div>
+                            </div>
+
+                            <!-- 성별 -->
+                            <div style="margin-bottom:12px;">
+                                <span style="font-size:13px; font-weight:700; color:#555; display:block; margin-bottom:6px;">· 성별</span>
+                                <div class="radio-grid">
+                                    <label class="custom-option"><input type="radio" name="gender" value="무관" checked> 무관</label>
+                                    <label class="custom-option"><input type="radio" name="gender" value="남성만"> 남성만</label>
+                                    <label class="custom-option"><input type="radio" name="gender" value="여성만"> 여성만</label>
+                                </div>
+                            </div>
+
+                            <!-- 기타 조건 -->
+                            <div>
+                                <span style="font-size:13px; font-weight:700; color:#555; display:block; margin-bottom:6px;">· 기타 조건</span>
+                                <input type="text" placeholder="예: 초보자 환영, 장비 필수 등">
+                            </div>
+                        </div>
+
+                        <!-- 대표 이미지 (로고/배너) -->
+                        <div class="form-group">
+                            <label class="group-label">대표 이미지 (로고/배너)</label>
+                            <div class="file-upload-box" onclick="document.getElementById('clubImageFile').click();">
+                                <div style="font-size:32px; color:var(--green); margin-bottom:6px;">📷</div>
+                                <div style="font-size:14px; color:#555; font-weight:600;">클릭하여 이미지를 첨부하세요</div>
+                                <div style="font-size:12px; color:#888; margin-top:4px;">JPG, PNG, GIF 파일 지원</div>
+                                <span class="file-upload-btn">[ 파일 첨부 ]</span>
+                                <input type="file" id="clubImageFile" accept="image/*" onchange="toast('이미지가 첨부되었습니다.')">
+                            </div>
+                        </div>
+
+                        <!-- 동호회 개설하기 버튼 -->
+                        <div class="submit-btn-wrap">
+                            <button type="submit" class="btn-submit">[ 동호회 개설하기 ]</button>
+                        </div>
+                    </form>
+                </div>
+            </div>`;
+        }
+
         function mapPage() { return `<div class="page-hero"><div class="wrap"><div class="crumb">홈 / 아카데미 / 지도 탐색</div><h1>내 주변 클래스와 학원 찾기</h1><p>지역과 조건을 선택하고 위치·가격을 한눈에 비교해 보세요.</p></div></div><div class="content"><div class="wrap"><div class="map-layout"><aside class="filter-panel"><h3>검색 조건</h3><div class="field"><label>지역 검색</label><input placeholder="예: 서울 마포구"></div><div class="filter-group"><b>유형</b><label><input type="checkbox" checked>원데이 클래스</label><label><input type="checkbox" checked>아카데미</label><label><input type="checkbox">소모임</label></div><div class="filter-group"><b>가격 공개</b><label><input type="checkbox" checked>가격 공개 업체 우선</label></div><button class="btn" style="width:100%" onclick="toast('검색 조건을 적용했어요.')">검색하기</button></aside><div class="mapfake"><span class="map-pin p1">도자기 공방</span><span class="map-pin p2">요가 스튜디오</span><span class="map-pin p3">드로잉 클래스</span><span class="map-pin p4">쿠킹 스튜디오</span></div><div class="map-results"><h3>지도 주변 프로그램</h3>${items.slice(0, 5).map(x => `<div class="map-result"><b>${x.title}</b><span>${x.place} · ${x.price.toLocaleString()}원</span></div>`).join("")}</div></div></div></div>` }
         function comparePage() { return `<div class="page-hero"><div class="wrap"><div class="crumb">홈 / 아카데미 / 수강료 비교</div><h1>조건을 비교하고 현명하게 선택하세요.</h1><p>월 수강료뿐 아니라 회당 단가, 수업 시간, 1:1 여부까지 비교해요.</p></div></div><div class="content"><div class="wrap"><div class="toolbar"><b>비교함에 담긴 아카데미 3개</b><button class="btn" onclick="toast('비교 리포트를 준비했어요.')">✦ AI 가성비 분석</button></div><div style="overflow:auto"><table class="compare-table"><thead><tr><th>비교 항목</th><th>밸런스 요가</th><th>홍대 댄스플로어</th><th>서촌 플라워룸</th></tr></thead><tbody><tr><td>월 수강료</td><td>120,000원</td><td>90,000원</td><td>160,000원</td></tr><tr><td>회당 단가</td><td><b style="color:var(--green)">15,000원</b></td><td><b style="color:var(--green)">11,250원 ★</b></td><td>20,000원</td></tr><tr><td>수업 횟수</td><td>월 8회</td><td>월 8회</td><td>월 8회</td></tr><tr><td>수업 시간</td><td>60분</td><td>50분</td><td>90분</td></tr><tr><td>1:1 여부</td><td>그룹</td><td>그룹</td><td>소그룹</td></tr><tr><td>주차</td><td>가능</td><td>불가</td><td>가능</td></tr><tr><td>평점</td><td>4.8</td><td>4.9</td><td>4.7</td></tr><tr><td> </td><td><button class="btn" data-page="detail">상세 보기</button></td><td><button class="btn" data-page="detail">상세 보기</button></td><td><button class="btn" data-page="detail">상세 보기</button></td></tr></tbody></table></div><div class="panel" style="margin-top:25px"><h3>✦ AI 비교 요약</h3><p>회당 단가는 홍대 댄스플로어가 가장 경제적입니다. 수업 시간과 주차 편의성을 함께 고려하면, 긴 수업을 선호하는 경우 서촌 플라워룸도 좋은 선택입니다. 실제 운영 조건은 예약 전 상세 페이지에서 확인해 주세요.</p></div></div></div>` }
         function detailPage() { let x = items.find(i => i.id === selectedItem) || items[0]; return `<div class="page-hero"><div class="wrap"><div class="crumb">홈 / 클래스 / 상세</div><h1>클래스 상세 정보</h1><p>수업 정보와 실제 후기를 확인하고 원하는 일정으로 예약해 보세요.</p></div></div><div class="content"><div class="wrap"><div class="detail-grid"><div><div class="detail-photo" style="background-image:url('${x.img}')"></div><div class="tabs"><button class="active">클래스 소개</button><button>커리큘럼</button><button>위치 안내</button><button>수강 후기</button></div><h2>${x.title}</h2><p style="line-height:1.8;color:#697166">${x.desc} 초보자도 부담 없이 참여할 수 있도록 재료와 기본 도구를 제공합니다. 수업 전 안내사항을 확인해 주세요.</p><div class="panel"><h3>수업 안내</h3><p>소요 시간 약 120분  난이도 입문</p><p>포함 사항 재료비 · 도구 대여 · 결과물 포장</p><p>취소/환불 수업일 기준 3일 전까지 전액 환불 (예시 정책)</p></div></div><div class="detail-box"><div class="meta">${x.kind} · ${x.cat}</div><h2>${x.title}</h2><div class="sub">${x.place}</div><div class="rating">★ <strong>${x.rating}</strong> 리뷰 ${x.reviews}개</div><div class="price">${x.price.toLocaleString()}원 <small>/ 1인</small></div><hr style="border:0;border-top:1px solid var(--line)"><h4>날짜와 시간을 선택하세요</h4><div class="slot">${["11월 14일 (토) 14:00", "11월 15일 (일) 11:00", "11월 21일 (토) 14:00"].map((s, i) => `<button class="${i === 0 ? "active" : ""}" data-slot="${s}">${s}</button>`).join("")}</div><div class="field"><label>참여 인원</label><select><option>1명</option><option>2명</option><option>3명</option><option>4명</option></select></div><button class="btn" style="width:100%" id="reserveBtn">예약 신청하기 →</button><button class="btn outline" style="width:100%;margin-top:9px" onclick="toast('찜 목록에 담았습니다.')">♡ 찜하기</button><p style="font-size:11px;color:#858c82;line-height:1.6">예약 신청 후 결제 단계에서 최종 금액과 환불 규정을 확인할 수 있습니다.</p></div></div></div></div>` }
@@ -1607,7 +1860,6 @@
         function aiPage() { return `<div class="page-hero"><div class="wrap"><div class="crumb">홈 / AI 매니저</div><h1>나에게 딱 맞는 취미를 찾아드릴게요.</h1><p>예산, 지역, 관심사를 말하면 DADA AI 매니저가 추천을 도와드려요.</p></div></div><div class="content"><div class="wrap"><div class="detail-grid"><div class="panel" style="background:#f2f6ee;padding:30px"><div style="font-size:40px">✦</div><h2>취향을 발견하는 작은 대화</h2><p>“월 5만원 이하로 주말에 할 수 있는 미술 클래스 찾아줘.”</p><p>“집 근처에서 초보자도 참여할 수 있는 사진 모임 추천해줘.”</p><button class="btn" id="aiStart">AI 매니저와 대화하기 →</button></div><div class="panel"><h3>추천을 더 정확하게</h3><div class="field"><label>관심 분야</label><select><option>미술·공예</option><option>요리</option><option>운동</option><option>음악</option></select></div><div class="field"><label>월 예산</label><select><option>5만원 이하</option><option>5~10만원</option><option>10~20만원</option></select></div><div class="field"><label>희망 지역</label><input placeholder="예: 인천 연수구"></div><button class="btn" id="aiStart2">맞춤 추천 받기</button></div></div></div></div>` }
         function support() { return `<div class="page-hero"><div class="wrap"><div class="crumb">홈 / 커뮤니티</div><h1>취미를 나누고, 궁금한 점을 해결해요.</h1><p>공지사항, 자주 묻는 질문, 수강 후기와 취미 이야기를 만나보세요.</p></div></div><div class="content"><div class="wrap"><div class="cards" style="grid-template-columns:repeat(3,1fr)"><div class="panel"><div style="font-size:30px">📢</div><h3>공지사항</h3><p>서비스 업데이트와 이벤트 소식을 확인하세요.</p><a class="more">공지사항 보기 →</a></div><div class="panel"><div style="font-size:30px">❔</div><h3>자주 묻는 질문</h3><p>예약, 결제, 취소와 환불 방법을 안내해요.</p><a class="more">FAQ 보기 →</a></div><div class="panel"><div style="font-size:30px">💬</div><h3>1:1 문의</h3><p>궁금한 점이나 불편 사항을 문의해 주세요.</p><a class="more" onclick="toast('로그인 후 문의를 남길 수 있어요.')">문의하기 →</a></div></div><div class="panel" style="margin-top:25px"><h3>자주 묻는 질문</h3><p><b>Q. 예약은 어떻게 하나요?</b><br>클래스 상세 페이지에서 날짜와 시간을 선택한 뒤 예약 신청을 진행해 주세요.</p><p><b>Q. 수강료는 어디서 확인하나요?</b><br>가격이 공개된 아카데미는 월 수강료와 회당 단가를 확인하고 비교할 수 있습니다.</p><p><b>Q. 비회원도 이용할 수 있나요?</b><br>비회원은 원데이 클래스 정보를 둘러보고 신청할 수 있으며, 소모임 등 일부 기능은 회원 가입이 필요합니다.</p></div></div></div>` }
         
-        /* ----- 후기 순수 자동 슬라이더 컨트롤러 (버튼 로직 제외) ----- */
         function initReviewSlider() {
             clearInterval(autoSlideTimer);
             const track = document.getElementById("reviewTrack");
@@ -1617,7 +1869,7 @@
                 const w = window.innerWidth;
                 if (w <= 620) return reviewsData.length - 1;
                 if (w <= 900) return reviewsData.length - 2;
-                return reviewsData.length - 3; // PC 화면 3개 표시
+                return reviewsData.length - 3;
             }
 
             function updateSlide(idx) {
@@ -1656,10 +1908,26 @@
             startTimer();
         }
 
+        /* 렌더링 함수 - createClub 신규 추가 */
         function render(page) { 
             clearInterval(autoSlideTimer);
             currentPage = page; 
-            const views = { home, classes: () => listing("classes"), academies: () => listing("academies"), clubs: clubsPage, map: mapPage, compare: comparePage, detail: detailPage, login: () => authPage(false), signup: () => authPage(true), mypage, instructor, ai: aiPage, support }; 
+            const views = { 
+                home, 
+                classes: () => listing("classes"), 
+                academies: () => listing("academies"), 
+                clubs: clubsPage, 
+                createClub: createClubPage, // 신규 동호회 개설 신청서 페이지
+                map: mapPage, 
+                compare: comparePage, 
+                detail: detailPage, 
+                login: () => authPage(false), 
+                signup: () => authPage(true), 
+                mypage, 
+                instructor, 
+                ai: aiPage, 
+                support 
+            }; 
             app.innerHTML = (views[page] || home)(); 
             window.scrollTo(0, 0); 
             document.querySelectorAll(".navlink").forEach(a => a.classList.toggle("active", a.dataset.page === page)); 
@@ -1673,18 +1941,24 @@
         function openChat() { document.getElementById("modal").innerHTML = `<div class="modal-head"><h3>✦ DADA AI 매니저</h3><button class="close" id="modalClose">×</button></div><p style="font-size:13px;color:#7b8378">취미와 클래스에 관해 무엇이든 물어보세요.</p><div class="chat-window" id="chatWindow"><div class="bubble">안녕하세요! DADA AI 매니저예요. 어떤 취미를 찾고 계신가요? 예산이나 지역을 알려주시면 더 잘 추천해 드릴게요. 🌿</div></div><div class="chat-input"><input id="chatText" placeholder="예: 주말에 할 수 있는 도자기 클래스"><button class="btn" id="chatSend">전송</button></div>`; document.getElementById("modalBack").classList.add("show"); document.getElementById("modalClose").onclick = closeModal; document.getElementById("chatSend").onclick = sendChat; document.getElementById("chatText").addEventListener("keydown", e => { if (e.key === "Enter") sendChat() }) }
         function sendChat() { let inp = document.getElementById("chatText"), v = inp.value.trim(); if (!v) return; let w = document.getElementById("chatWindow"); w.innerHTML += `<div class="bubble me">${v.replace(/[<>&]/g, c => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" }[c]))}</div><div class="bubble">말씀하신 조건을 바탕으로 프로그램을 찾을 수 있도록 준비하고 있어요. 현재 데모 화면에서는 예시 추천만 제공하며, 실제 AI 검색은 서버/API 연동이 필요합니다. 아래 인기 프로그램도 살펴보세요. <br><b>추천: 나만의 감성 도자기 만들기 · 45,000원</b></div>`; inp.value = ""; w.scrollTop = w.scrollHeight }
         function closeModal() { document.getElementById("modalBack").classList.remove("show") }
+        
         document.addEventListener("click", e => {
             const pg = e.target.closest("[data-page]"); if (pg) { e.preventDefault(); render(pg.dataset.page); return }
             const heart = e.target.closest("[data-heart]"); if (heart) { let id = Number(heart.dataset.heart); saved.has(id) ? saved.delete(id) : saved.add(id); heart.classList.toggle("active"); toast(saved.has(id) ? "찜 목록에 담았습니다." : "찜 목록에서 삭제했습니다."); return }
             const detail = e.target.closest("[data-detail]"); if (detail) { selectedItem = Number(detail.dataset.detail); render("detail"); return }
             const slot = e.target.closest("[data-slot]"); if (slot) { document.querySelectorAll("[data-slot]").forEach(b => b.classList.remove("active")); slot.classList.add("active"); selectedSlot = slot.dataset.slot; return }
         });
+
         document.getElementById("globalSearch").addEventListener("submit", e => { e.preventDefault(); let q = document.getElementById("searchInput").value.trim(); render("classes"); if (q) toast(`'${q}' 검색 결과를 보여드려요.`) });
         document.getElementById("chatOpen").onclick = openChat;
-        document.getElementById("quickPlus").onclick = () => { document.getElementById("modal").innerHTML = `<div class="modal-head"><h3>무엇을 등록할까요?</h3><button class="close" id="modalClose">×</button></div><p style="color:#778071;font-size:13px">DADA에서 새로운 배움과 모임을 시작해 보세요.</p><div class="rank-grid"><button class="panel" data-page="instructor"><b>🎨 클래스 등록</b><p>나만의 수업을 소개하고 수강생을 모집해요.</p></button><button class="panel" onclick="toast('로그인 후 소모임을 개설할 수 있어요.')"><b>🤝 소모임 개설</b><p>관심사가 같은 사람들과 함께해요.</p></button></div>`; document.getElementById("modalBack").classList.add("show"); document.getElementById("modalClose").onclick = closeModal };
-        document.getElementById("allMenuBtn").onclick = () => { document.getElementById("modal").innerHTML = `<div class="modal-head"><h3>DADA 전체 메뉴</h3><button class="close" id="modalClose">×</button></div><div class="rank-grid" style="grid-template-columns:repeat(2,1fr)">${[["클래스", "classes", "인기 클래스 · 원데이 · 주말 클래스"], ["아카데미", "academies", "학원 찾기 · 지도 탐색 · 수강료 비교"], ["소모임", "clubs", "모임 탐색 · 정기모임 · 갤러리"], ["AI 매니저", "ai", "맞춤 추천 · 가성비 분석 · 코스 플래너"], ["마이페이지", "mypage", "예약 · 일정 · 찜 · 프로필"], ["파트너 센터", "instructor", "클래스 관리 · 수강생 · 정산"], ["커뮤니티", "support", "공지 · FAQ · 1:1 문의"], ["지도 탐색", "map", "내 주변 클래스와 학원"]].map(x => `<a class="panel" href="#" data-page="${x[1]}"><b>${x[0]}</b><p>${x[2]}</p></a>`).join("")}</div>`; document.getElementById("modalBack").classList.add("show"); document.getElementById("modalClose").onclick = closeModal };
+        
+        /* 플로팅 + 버튼 클릭 시에도 개설 신청 페이지로 넘어가도록 연결 */
+        document.getElementById("quickPlus").onclick = () => { render("createClub"); };
+        
+        document.getElementById("allMenuBtn").onclick = () => { document.getElementById("modal").innerHTML = `<div class="modal-head"><h3>DADA 전체 메뉴</h3><button class="close" id="modalClose">×</button></div><div class="rank-grid" style="grid-template-columns:repeat(2,1fr)">${[["클래스", "classes", "인기 클래스 · 원데이 · 주말 클래스"], ["아카데미", "academies", "학원 찾기 · 지도 탐색 · 수강료 비교"], ["소모임", "clubs", "모임 탐색 · 정기모임 · 갤러리"], ["소모임 개설", "createClub", "📝 동호회 개설 신청서 작성"], ["AI 매니저", "ai", "맞춤 추천 · 가성비 분석 · 코스 플래너"], ["마이페이지", "mypage", "예약 · 일정 · 찜 · 프로필"], ["파트너 센터", "instructor", "클래스 관리 · 수강생 · 정산"], ["커뮤니티", "support", "공지 · FAQ · 1:1 문의"]].map(x => `<a class="panel" href="#" data-page="${x[1]}"><b>${x[0]}</b><p>${x[2]}</p></a>`).join("")}</div>`; document.getElementById("modalBack").classList.add("show"); document.getElementById("modalClose").onclick = closeModal };
         document.getElementById("modalBack").addEventListener("click", e => { if (e.target.id === "modalBack") closeModal() });
         document.addEventListener("click", e => { if (e.target.id === "reserveBtn") toast(`예약 일정: ${selectedSlot} · 다음 단계에서 결제를 진행합니다.`); if (e.target.id === "aiStart" || e.target.id === "aiStart2") openChat() });
+        
         render("home");
     </script>
 </body>
