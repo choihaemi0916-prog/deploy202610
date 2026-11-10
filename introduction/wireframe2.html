@@ -1174,30 +1174,6 @@
         .panel h3 { font-size: 16px; margin: 0 0 16px }
         .panel p { font-size: 13px; color: #727a70 }
 
-        .chat-float,
-        .plus-float {
-            position: fixed;
-            right: 25px;
-            z-index: 60;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            box-shadow: 0 8px 22px #1f432c33;
-            font-size: 22px
-        }
-
-        .chat-float {
-            bottom: 95px;
-            background: var(--green);
-            color: #fff
-        }
-
-        .plus-float {
-            bottom: 27px;
-            background: var(--yellow);
-            color: #263323
-        }
-
         .modal-back {
             display: none;
             position: fixed;
@@ -1451,6 +1427,119 @@
             background: #1c422a;
             transform: translateY(-2px);
         }
+        /* 우측 픽스드 사이드바 디자인 */
+        .quick-sidebar {
+        position: fixed;
+        right: 24px;
+        bottom: 40px;
+        z-index: 9999;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(229, 231, 235, 0.8);
+        border-radius: 20px;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+        padding: 12px 8px;
+        width: 80px;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* 상단 작은 포인트 타이틀 */
+        .quick-sidebar .quick-menu-header {
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        color: #9ca3af;
+        text-align: center;
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+        border-bottom: 1px dashed #e5e7eb;
+        }
+
+        /* 메뉴 리스트 */
+        .quick-sidebar .quick-menu-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        align-items: center;
+        }
+
+        /* 개별 버튼 및 링크 스타일 (글자 크기 키우고 시인성 개선) */
+        .quick-sidebar .btn-quick,
+        .quick-sidebar .btn-top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 64px;
+        height: 60px;
+        background: transparent;
+        border: none;
+        border-radius: 14px;
+        cursor: pointer;
+        text-decoration: none;
+        color: #4b5563;
+        transition: all 0.2s ease;
+        }
+
+        /* 아이콘 래퍼 */
+        .quick-sidebar .icon-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 4px;
+        transition: transform 0.2s ease;
+        }
+
+        /* 라벨 텍스트 크기 확대 및 가독성 업 */
+        .quick-sidebar .label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+        line-height: 1.2;
+        }
+
+        /* 마우스 오버 효과 */
+        .quick-sidebar .btn-quick:hover,
+        .quick-sidebar .btn-top:hover {
+        background-color: #ffffff;
+        color: #111827;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        transform: translateY(-2px);
+        }
+
+        .quick-sidebar .btn-quick:hover .icon-wrap,
+        .quick-sidebar .btn-top:hover .icon-wrap {
+        transform: scale(1.1);
+        }
+
+        /* 소모임 개설 특별 강조 (예쁜 포인트 컬러) */
+        .quick-sidebar .btn-quick.highlight {
+        color: #ec4899; /* 사랑스러운 핑크/마젠타 포인트 */
+        }
+        .quick-sidebar .btn-quick.highlight:hover {
+        background-color: #fdf2f8;
+        }
+
+        /* AI 버튼 포인트 컬러 */
+        .quick-sidebar .ai-btn {
+        color: #6366f1; /* 인디고 톤 */
+        }
+        .quick-sidebar .ai-btn:hover {
+        background-color: #eef2ff;
+        }
+
+        /* TOP 버튼 디자인 분리 */
+        .quick-sidebar .btn-top {
+        border-top: 1px solid #f3f4f6;
+        margin-top: 4px;
+        padding-top: 6px;
+        color: #6b7280;
+        height: 52px;
+        }        
 
         @media(max-width:900px) {
             .headrow { gap: 12px }
@@ -1547,20 +1636,89 @@
             .dashboard { grid-template-columns: 1fr 1fr }
             .field-row { grid-template-columns: 1fr }
             .form-card { padding: 22px }
-
-            .chat-float,
-            .plus-float {
-                right: 15px;
-                width: 48px;
-                height: 48px
-            }
-
-            .chat-float { bottom: 83px }
             .club-form-container { width: 95%; padding: 20px; }
             .radio-grid, .check-grid { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
+
+<aside class="quick-sidebar" aria-label="빠른 메뉴">
+  <div class="quick-menu-header">QUICK</div>
+  <ul class="quick-menu-list">
+    <li>
+      <button type="button" class="btn-quick" onclick="openAllMenu()">
+        <span class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </span>
+        <span class="label">전체메뉴</span>
+      </button>
+    </li>
+    <li>
+      <a href="/map" class="btn-quick">
+        <span class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </span>
+        <span class="label">내 근처</span>
+      </a>
+    </li>
+    <li>
+      <a href="/my/schedule" class="btn-quick">
+        <span class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </span>
+        <span class="label">내 일정</span>
+      </a>
+    </li>
+    <li>
+      <a href="/chat" class="btn-quick">
+        <span class="icon-wrap badge-dot">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </span>
+        <span class="label">채팅방</span>
+      </a>
+    </li>
+    <li>
+      <a href="/my/recent" class="btn-quick">
+        <span class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </span>
+        <span class="label">최근/찜</span>
+      </a>
+    </li>
+    <li>
+      <a href="/group/create" class="btn-quick highlight">
+        <span class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </span>
+        <span class="label">모임개설</span>
+      </a>
+    </li>
+    <li>
+      <button type="button" class="btn-quick ai-btn">
+        <span class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M9 14h6"/></svg>
+        </span>
+        <span class="label">챗봇AI</span>
+      </button>
+    </li>
+    <li>
+      <a href="/cs" class="btn-quick">
+        <span class="icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+        </span>
+        <span class="label">고객센터</span>
+      </a>
+    </li>
+    <li>
+      <button type="button" class="btn-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <span class="icon-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+        </span>
+        <span class="label">TOP</span>
+      </button>
+    </li>
+  </ul>
+</aside>
 
 <body>
     <div class="topline">
@@ -1589,6 +1747,8 @@
                     <div class="mega"><strong>CLUB · 함께하는 취미</strong><a data-page="clubs">소모임 둘러보기</a><a
                             data-page="clubs">지역별 모임</a><a data-page="clubs">정기모임 캘린더</a><a data-page="createClub">모임 만들기</a><a data-page="clubs">활동 갤러리</a></div>
                 </div>
+                <div class="navitem"><a class="navlink" href="#" data-page="ai">지도</a>
+                </div>                
                 <div class="navitem"><a class="navlink" href="#" data-page="ai">AI 매니저</a>
                     <div class="mega"><strong>AI MANAGER · 취향을 읽다</strong><a data-page="ai">맞춤 클래스 추천</a><a
                             data-page="compare">가성비 비교 분석</a><a data-page="ai">일일 코스 플래너</a></div>
@@ -1626,8 +1786,6 @@
             <div class="copyright">© 2026 DADA. All rights reserved. 이용약관 개인정보처리방침</div>
         </div>
     </footer>
-    <button class="chat-float" id="chatOpen" title="AI 매니저">✦</button><button class="plus-float" id="quickPlus"
-        title="클래스·모임 등록">＋</button>
     
     <div class="modal-back" id="modalBack">
         <div class="modal" id="modal"></div>
@@ -1739,10 +1897,8 @@
         
         function listing(type) { let data = type === "classes" ? items.filter(x => x.kind === "원데이 클래스") : items.filter(x => x.kind === "아카데미"); return `<div class="page-hero"><div class="wrap"><div class="crumb">홈 / ${type === "classes" ? "클래스" : "아카데미"}</div><h1>${type === "classes" ? "하루의 새로운 경험, 원데이 클래스" : "꾸준히 성장하는 배움, 아카데미"}</h1><p>${type === "classes" ? "하루 동안 새로운 취미를 경험하고 나만의 작품을 만들어보세요." : "내 주변 학원과 센터의 수강료·시설·수업 조건을 비교해 보세요."}</p></div></div><div class="content"><div class="wrap"><div class="toolbar"><div class="filters"><button class="selected">전체</button><button>공예</button><button>요리</button><button>미술</button><button>운동</button><button>음악</button><button>사진</button></div><select id="sort"><option>인기순</option><option>가격 낮은순</option><option>평점 높은순</option><option>최신순</option></select></div><div class="listing-layout"><aside class="filter-panel"><h3>상세 필터</h3><div class="filter-group"><b>분야</b>${["미술·공예", "요리·베이킹", "운동·건강", "음악·댄스", "사진·영상"].map(v => `<label><input type="checkbox">${v}</label>`).join("")}</div><div class="filter-group"><b>가격대</b><label><input type="checkbox">3만원 이하</label><label><input type="checkbox">3~5만원</label><label><input type="checkbox">5~10만원</label></div><div class="filter-group"><b>수업 조건</b><label><input type="checkbox">가격 공개</label><label><input type="checkbox">주차 가능</label><label><input type="checkbox">1:1 수업</label></div><button class="btn" style="width:100%" onclick="toast('필터가 적용되었습니다.')">필터 적용</button></aside><div class="listing"><div class="section-head"><div><b>${data.length}개의 프로그램</b><p>원하는 조건으로 취향에 맞는 배움을 찾아보세요.</p></div><a class="more" href="#" data-page="map">지도로 보기 →</a></div><div class="cards" id="listingCards">${data.map(card).join("")}</div></div></div></div></div>` }
         
-        /* 소모임 둘러보기 페이지 (모임 만들기 클릭 시 새 페이지 이동) */
         function clubsPage() { return `<div class="page-hero"><div class="wrap"><div class="crumb">홈 / 소모임</div><h1>취향이 통하는 사람들과 함께</h1><p>관심사가 같은 사람들과 새로운 취미를 만들고 일상을 나눠보세요.</p></div></div><div class="content"><div class="wrap"><div class="toolbar"><div class="filters"><button class="selected">전체 모임</button><button>운동</button><button>문화·예술</button><button>독서</button><button>사진</button></div><button class="btn" data-page="createClub">＋ 모임 만들기</button></div><div class="club-grid"><div class="club-feature"><span class="tag" style="position:static;width:max-content">이번 주 추천</span><h3>주말의 작은 모험을<br>함께 시작해요.</h3><p>가까운 동네에서 만나는 취미 친구</p><div><button class="btn light" data-page="createClub">소모임 개설하기 →</button></div></div><div class="club-list">${clubs.map(c => `<div class="club-row"><div class="club-icon">${c.emoji}</div><div><h4>${c.name}</h4><p>${c.desc}</p><p style="margin-top:6px">${c.area} · ${c.people}</p></div><span>참여하기</span></div>`).join("")}</div></div><div class="panel" style="margin-top:25px"><h3>이번 달 정기모임 일정</h3><p>11.08 (일) 서울 산책단 한강 걷기  11.14 (토) 드로잉 클럽 정기 모임 11.21 (토) 셔터 누르는 사람들 출사</p></div></div></div>` }
         
-        /* ===== 📝 동호회 개설 신청서 전용 새 페이지 (독립 페이지 UI) ===== */
         function createClubPage() {
             return `
             <div class="page-hero">
@@ -1758,13 +1914,11 @@
                     <p class="form-desc">아래 작성 항목을 정확히 입력해주시면 검토 후 소모임이 등록됩니다.</p>
 
                     <form id="clubCreateForm" onsubmit="event.preventDefault(); toast('동호회 개설 신청이 완료되었습니다!'); render('clubs');">
-                        <!-- 동호회 이름 -->
                         <div class="form-group">
                             <label class="group-label">동호회 이름 <span class="req">*</span></label>
                             <input type="text" placeholder="예: [서울] 야간 러닝 크루 '달밤'" required>
                         </div>
 
-                        <!-- 동호회 카테고리 (택일) -->
                         <div class="form-group">
                             <label class="group-label">동호회 카테고리 (택일) <span class="req">*</span></label>
                             <div class="radio-grid">
@@ -1780,29 +1934,23 @@
                             </div>
                         </div>
 
-                        <!-- 활동 지역 -->
                         <div class="form-group">
                             <label class="group-label">활동 지역 <span class="req">*</span></label>
                             <input type="text" placeholder="예: 서울시 마포구 일대 또는 온/오프라인 병행" required>
                         </div>
 
-                        <!-- 동호회 소개 한 줄 -->
                         <div class="form-group">
                             <label class="group-label">동호회 소개 한 줄 <span class="req">*</span></label>
                             <input type="text" placeholder="예: 퇴근 후 함께 가볍게 달리며 스트레스를 풀 분들을 모집합니다!" required>
                         </div>
 
-                        <!-- 상세 소개 및 개설 목적 -->
                         <div class="form-group">
                             <label class="group-label">상세 소개 및 개설 목적 <span class="req">*</span></label>
                             <textarea rows="5" placeholder="활동 내용, 정기 모임 주기(예: 매주 목요일 저녁 8시), 가입 조건 등을 자유롭게 적어주세요." required></textarea>
                         </div>
 
-                        <!-- 가입 조건 -->
                         <div class="form-group">
                             <label class="group-label">가입 조건</label>
-                            
-                            <!-- 연령대 -->
                             <div style="margin-bottom:12px;">
                                 <span style="font-size:13px; font-weight:700; color:#555; display:block; margin-bottom:6px;">· 연령대</span>
                                 <div class="check-grid">
@@ -1813,7 +1961,6 @@
                                 </div>
                             </div>
 
-                            <!-- 성별 -->
                             <div style="margin-bottom:12px;">
                                 <span style="font-size:13px; font-weight:700; color:#555; display:block; margin-bottom:6px;">· 성별</span>
                                 <div class="radio-grid">
@@ -1823,14 +1970,12 @@
                                 </div>
                             </div>
 
-                            <!-- 기타 조건 -->
                             <div>
                                 <span style="font-size:13px; font-weight:700; color:#555; display:block; margin-bottom:6px;">· 기타 조건</span>
                                 <input type="text" placeholder="예: 초보자 환영, 장비 필수 등">
                             </div>
                         </div>
 
-                        <!-- 대표 이미지 (로고/배너) -->
                         <div class="form-group">
                             <label class="group-label">대표 이미지 (로고/배너)</label>
                             <div class="file-upload-box" onclick="document.getElementById('clubImageFile').click();">
@@ -1842,7 +1987,6 @@
                             </div>
                         </div>
 
-                        <!-- 동호회 개설하기 버튼 -->
                         <div class="submit-btn-wrap">
                             <button type="submit" class="btn-submit">[ 동호회 개설하기 ]</button>
                         </div>
@@ -1908,7 +2052,6 @@
             startTimer();
         }
 
-        /* 렌더링 함수 - createClub 신규 추가 */
         function render(page) { 
             clearInterval(autoSlideTimer);
             currentPage = page; 
@@ -1917,7 +2060,7 @@
                 classes: () => listing("classes"), 
                 academies: () => listing("academies"), 
                 clubs: clubsPage, 
-                createClub: createClubPage, // 신규 동호회 개설 신청서 페이지
+                createClub: createClubPage, 
                 map: mapPage, 
                 compare: comparePage, 
                 detail: detailPage, 
@@ -1950,10 +2093,6 @@
         });
 
         document.getElementById("globalSearch").addEventListener("submit", e => { e.preventDefault(); let q = document.getElementById("searchInput").value.trim(); render("classes"); if (q) toast(`'${q}' 검색 결과를 보여드려요.`) });
-        document.getElementById("chatOpen").onclick = openChat;
-        
-        /* 플로팅 + 버튼 클릭 시에도 개설 신청 페이지로 넘어가도록 연결 */
-        document.getElementById("quickPlus").onclick = () => { render("createClub"); };
         
         document.getElementById("allMenuBtn").onclick = () => { document.getElementById("modal").innerHTML = `<div class="modal-head"><h3>DADA 전체 메뉴</h3><button class="close" id="modalClose">×</button></div><div class="rank-grid" style="grid-template-columns:repeat(2,1fr)">${[["클래스", "classes", "인기 클래스 · 원데이 · 주말 클래스"], ["아카데미", "academies", "학원 찾기 · 지도 탐색 · 수강료 비교"], ["소모임", "clubs", "모임 탐색 · 정기모임 · 갤러리"], ["소모임 개설", "createClub", "📝 동호회 개설 신청서 작성"], ["AI 매니저", "ai", "맞춤 추천 · 가성비 분석 · 코스 플래너"], ["마이페이지", "mypage", "예약 · 일정 · 찜 · 프로필"], ["파트너 센터", "instructor", "클래스 관리 · 수강생 · 정산"], ["커뮤니티", "support", "공지 · FAQ · 1:1 문의"]].map(x => `<a class="panel" href="#" data-page="${x[1]}"><b>${x[0]}</b><p>${x[2]}</p></a>`).join("")}</div>`; document.getElementById("modalBack").classList.add("show"); document.getElementById("modalClose").onclick = closeModal };
         document.getElementById("modalBack").addEventListener("click", e => { if (e.target.id === "modalBack") closeModal() });
